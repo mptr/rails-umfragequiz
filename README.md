@@ -2,7 +2,7 @@
 
 ## Klassendiagramm:
 
-![](http://www.plantuml.com/plantuml/png/ZLHDRnen4BtxLup8eLAbFUIAq3OjHLKa0WJ3eQggoi24MF7QrFOshGZ_lSPoWeVTJS81hSTltfkF6LyvBwolAyK-N1n_y6qq6Sq_Zpd48sDh9Po3fKCBUmQ0bP2g3yvRgRVXN8SBBIfyCHsI1w_j7_mNVSWzm9qrrLVXW-du7mpUfC-JxwgIpacZEVhzWKNrtcKFYervr0NqFlOefWsH8c0fa7ZPz0J6n2g49jOUpiKXI1CmKNZ8cQ0FWu6n6xIuAKlsNCpRvOWlhgUJLCsBXjXjZSv7AGPWTiTF4SgxCaQXqC6sGRUsCbva9KuvqN1EP3IO5tE4rxlpAZI2cjJL2krSw2tcySN6zK77szIsT3YmDfz2uPqldieKM8lI78MrHn-nKbHBQFU8TXeJTy-P__WPbDfz2YktzqIiqOI2Bxyiliz67FB9vag6Gfsq3unQOiK2RKk2B2iNOQ2MrnWInGB_-fo0d9FxkSzanebcTkpm61fbI9pKqE75G-4L3k-DNDCMrRk5wSDbQ0c5KBgRMdcvQzmczkOrvV-KZLW3IdJEnuBaCBFIv8cJyti8nl81hIVX_Ku7EfqKsCbD1ZJCvSqrv-ITo4ShhIfT3Rfx11NtkpXAnvNF9kCDQCU8aaQz8wHOY4uyLUoeJBONhLBPMqWnb9uirkj8iWknDQGpC1nF9oDeVyLFfBzWC5Whex4iOT_iJ7gjdqhYqbMh3ZZ9emF4hb1lwahz1m00)
+![](http://www.plantuml.com/plantuml/png/ZLHVRzem47_tfpZHXqcJyj3NgChQTMYgH85YU9YcQJBaIgqwCRETTHFbky-EqjH7S5SUKExkTx_xxqlhX75DfTY7i_23h-FfU74ruT2AZ6sKi1PM5Wti6G1MGgeSh3EotdgvyOPQLDYh3fq7Rynl_Dlw43l0lT7L5-6yAlmxMQ5NEarL4S-wajPANNDqWSq6XNDONhaSbXxgAwXs7j_cE3eVGLRgfpg3qSSHzKuWGfwiIxSr3Zs1CR7s1OYDW-EqO7zW14mYFCPCaCF5XJOb6YoBWhsq_6urvikRsRJh-TaWs5tZYmp-eNwz2vz2vR3MMg6elQv4kp6oDKI3w6iYwVHaD9bUtSARtN4N1abDcsgDPY7gBPBymdXpg5jhEzXUEB1JFfd2UvSz5trYWqWB5CO47x5MD9QexHEQMLkuVQdy-myVwRHFPkJsWGGR327Zgy_BR_CnXtZ_kP8bcjVO1qOreME1zaI1B6eNOI2QDnawYYN-SJ519nFtOv_fd9EOlPZqkDPAapof8k75VUCLNZzekQ4ZQdPBdSEv7mc5KBhRHZcv6rWxTceUyd-ALen01t78MXpNC3TInuKJ-Jq44_c8nf7qVdK2tKuAJ77J1VLxUNl3UVnEaDNgJfMU1hqzYWhtdONGuUJZHVaFDB6YP53lIAbj1C4d8oOw4zz58bJ_5b8CfIU7zIQI7aSO3PqCN4zcqp6SViLVIN_wbtUZT8r50VlXPBhN-haWBebUfU2aZWI8NM9TDfNw1m00)
 
 <!--
 @startuml
@@ -14,10 +14,12 @@ class User {
 }
 class Survey {
   name: string
-  fromDate: Date
-  to: Date
+  fromDate: Datetime
+  toDate: Datetime
 }
-class SubmissionSet{}
+class SubmissionSet{
+  submittedAt: Timestamp
+}
 User "1" -down- "*" SubmissionSet
 User "1" -down- "*" Survey
 Survey "1" - "*" SubmissionSet 
