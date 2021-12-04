@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :color_questions
+  resources :text_submissions
+  resources :text_questions
   resources :submissions
   resources :questions
   resources :submission_sets
