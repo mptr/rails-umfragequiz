@@ -1,0 +1,2 @@
+class SliderQuestion < NumberRangeQuestion
+end

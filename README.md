@@ -2,7 +2,7 @@
 
 ## Klassendiagramm:
 
-![](http://www.plantuml.com/plantuml/png/ZLHVRzem47_tfpZHXqcJyj3NgChQTMYgH85YU9YcQJBaIgqwCRETTHFbky-EqjH7S5SUKExkTx_xxqlhX75DfTY7i_23h-FfU74ruT2AZ6sKi1PM5Wti6G1MGgeSh3EotdgvyOPQLDYh3fq7Rynl_Dlw43l0lT7L5-6yAlmxMQ5NEarL4S-wajPANNDqWSq6XNDONhaSbXxgAwXs7j_cE3eVGLRgfpg3qSSHzKuWGfwiIxSr3Zs1CR7s1OYDW-EqO7zW14mYFCPCaCF5XJOb6YoBWhsq_6urvikRsRJh-TaWs5tZYmp-eNwz2vz2vR3MMg6elQv4kp6oDKI3w6iYwVHaD9bUtSARtN4N1abDcsgDPY7gBPBymdXpg5jhEzXUEB1JFfd2UvSz5trYWqWB5CO47x5MD9QexHEQMLkuVQdy-myVwRHFPkJsWGGR327Zgy_BR_CnXtZ_kP8bcjVO1qOreME1zaI1B6eNOI2QDnawYYN-SJ519nFtOv_fd9EOlPZqkDPAapof8k75VUCLNZzekQ4ZQdPBdSEv7mc5KBhRHZcv6rWxTceUyd-ALen01t78MXpNC3TInuKJ-Jq44_c8nf7qVdK2tKuAJ77J1VLxUNl3UVnEaDNgJfMU1hqzYWhtdONGuUJZHVaFDB6YP53lIAbj1C4d8oOw4zz58bJ_5b8CfIU7zIQI7aSO3PqCN4zcqp6SViLVIN_wbtUZT8r50VlXPBhN-haWBebUfU2aZWI8NM9TDfNw1m00)
+![](http://www.plantuml.com/plantuml/png/ZLJDRXen4BxxAKRqKAdI7d954KrAKHM9067XK5LLPLY7MF6kgUrjMb7UlRFJBfdrMeKz9CpFVD_yZEV61-b2NHhnzatpmQV9RBAydUP0eX1R8xs7jLSE3W90bLAR8VZWTBL3kKP39KjrKXt_HUIr-w5-KGote_ZeRFbH1bGrVuCk5Ig3xQeOpgRKtcjRvIeqQBvHXA2Asp245RfY1UKU_Id7mTK0iiA-L1aCtWswqMaFobFy_KV6H2G88JTOWDm6YDE2mr5qdGd4wTrJGAXd3WL3kBwshb1E5QEHQ7l-i9xagxlv39jENu_jeSOgYKi0s7tpK-8KDjOQ9IlK5SfldIO3cmGlYYgcT0YidqpCEQlBZN9BMUqKfwVn3Q4YAmsk5P0m5PCPzHYotwCJRuzfgQHpJOpSc2wNhFoBSdEgoxU5VVcAJEaOwdf45lKuozSVLfyNanpuVkT6OnzUkOyYqcJr7c5JJH6yNHo1D9SWj4cirC_00KYEmkEOsIBd8IYUYnXROnsF8SMvg1mRRzJuoUfjTqJrVeKRS8KZYLqut7rjWjxth2rwR8xmtxCLYrmZdkHQj2mBfoqldCcN0KpritAXazvt4kBjZ1oJsF62ubxUt-KvFmETrJfT4VuqM6DYBxfYMKDD1u1jnbdNz8hoGLsG4ZMYvvzcJ7U6luia5JjrtAS7pn_I_ptfBR3HH9E1yNG-cq3wIB-2ViF3kZMsKgCH71AJeMFSR0GFuRswm3sg8-aaRbHLrANv0m00)
 
 <!--
 @startuml
@@ -25,7 +25,7 @@ User "1" -down- "*" Survey
 Survey "1" - "*" SubmissionSet 
 
 abstract class Submission {}
-SubmissionSet "1" -down- "k" Submission : <<ordered>>
+SubmissionSet "1" -right- "k" Submission : <<ordered>>
 
 '##### QUESTIONS ######
 
@@ -34,7 +34,6 @@ abstract class Question {
   description: string
 }
 Survey "1" -down- "k" Question : <<ordered>>
-Question "1" -up- "*" Submission
 
 abstract class NumberRangeQuestion {
   from: number
@@ -109,3 +108,18 @@ MultipleNumberSubmission -down-|> Submission_
 TextSubmission -down-|> Submission_
 @enduml
 -->
+
+Testscript:
+```rb
+u = User.create(username: "user1", email: "user1@surveys.com")
+
+s = u.surveys.create(name: "TestSurvey", fromDate: DateTime.now, toDate: DateTime.now)
+
+# kein direktes s.questions.create(...) möglich, da sonst nicht klar ist, welcher Question-Typ generiert wird.
+q1 = TextQuestion.create(optional: false, description: "Whats your name?")
+s.questions.append(q1)
+
+q2 = ColorQuestion.create(optional: true, description: "Whats yout favourite color?")
+s.questions.append(q2)
+
+```

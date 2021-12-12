@@ -1,0 +1,2 @@
+class NumberQuestion < NumberRangeQuestion
+end

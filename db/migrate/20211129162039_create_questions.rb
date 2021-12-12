@@ -1,6 +1,15 @@
 class CreateQuestions < ActiveRecord::Migration[6.1]
   def change
     create_table :questions do |t|
+      # STI Feld
+      t.string :type, null: false
+    
+      # NumberRangeQuestion Felder
+      t.decimal :from
+      t.decimal :to
+      t.decimal :step
+
+      # eigene Felder
       t.boolean :optional
       t.string :description
       t.references :survey, null: false, foreign_key: true
