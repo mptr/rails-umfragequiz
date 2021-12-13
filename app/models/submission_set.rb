@@ -3,5 +3,7 @@ class SubmissionSet < ApplicationRecord
   belongs_to :survey
 
   # validation
-  # TODO: validate Timestamp
+  # TODO: 
+  # - validate Timestamp
+  # - lieber Timestamp aus created_at beziehen?
 end
