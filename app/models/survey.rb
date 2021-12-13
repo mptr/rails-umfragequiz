@@ -9,6 +9,7 @@ class Survey < ApplicationRecord
 	validate :datetime_valid_to
 
 	# eigene Validierungsmethode
+	# TODO: How to refactor?
 	def datetime_valid_from
 		if ((DateTime.parse(fromDate) rescue ArgumentError) == ArgumentError)
 			errors.add(:fromDate, "Startdatum ungültig")

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :string_questions
   resources :slider_questions
   resources :number_questions
   resources :number_range_questions
