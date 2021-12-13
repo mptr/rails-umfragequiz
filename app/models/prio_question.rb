@@ -1,0 +1,2 @@
+class PrioQuestion < RearrangeableQuestion
+end

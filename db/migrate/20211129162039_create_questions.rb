@@ -9,6 +9,9 @@ class CreateQuestions < ActiveRecord::Migration[6.1]
       t.decimal :to
       t.decimal :step
 
+      # MultipleChoiceQuestion Felder
+      t.integer :upTo
+
       # eigene Felder
       t.boolean :optional
       t.string :description

@@ -1,0 +1,2 @@
+class MultipleChoiceQuestion < RearrangeableQuestion
+end

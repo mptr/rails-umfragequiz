@@ -1,0 +1,2 @@
+class LikertQuestion < RearrangeableQuestion
+end

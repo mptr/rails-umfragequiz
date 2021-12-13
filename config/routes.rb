@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  # TODO
+  resources :single_choice_questions
+  resources :multiple_choiche_questions
+  resources :likert_questions
+  resources :prio_questions
+  resources :multiple_number_submissions
+  resources :rearrangeable_questions
   resources :string_questions
   resources :slider_questions
   resources :number_questions
