@@ -2,7 +2,7 @@
 
 ## Klassendiagramm:
 
-![](http://www.plantuml.com/plantuml/png/ZLNVJzim47xtNt4g3vCcHHglLSbWh9gGeFn8UPWGcjpc00idpcndR2hzt-SOP_FLeGeFgFVZlk_kyyK-DfPhsrQIVJZe_k3RV36_EJalm9kChIKt1cuDQjWm0Aoua5CmLelwqTcj2zIymd-kRQWeMlqB__WQ4WTuqAhwogrpTV-jgD0vhQAk26TL2ME4gWkq7Phf7DPYUMAdi7IfReAgSVc-nydX1B9IlTGPJ3vEQFLGHkYJXNPzCAq4nlZA3S3N5dRRWisMqMGFeiNZatLGpp4KJ64sKxf4ZMMUirxpwzjviJoxN0JH3nAswzPDwRaOW6gwdrnEOQMKH5uxNubchOKFH2SHXeedTktqOBIPX7FHLYlKDxn-H4BV7TyKQX_r1nSPncBJcmwyn0VUIdjqwE2tR0WmQvliDOVUJfguGQvrLy5NahR1Q_E2-jAFRFgPx-uT3wqPorHuWFyKMqOzAS0WJpZukoTHbbZVPpku13JD7XATmUwQPCNjb-Ntg_dRklWj6Yg4BXY6aw94JOQZdZ3S47sq3GI1UaOWN1NlxX4SmI7PfSxnYInKIDeoXpE6r8j6r2UABF6tZQSXTe2bnQ7mL4b5TA0EKagR6LncSagkHEBfan9hkkjjirGxAj1SIdxHIYkQ91fOqYZX-TmJEP8abT3GSQXALrgeM2HYZwW_5y-eBMdkPp3enquJzqFttv7xV2xEYYA-SCcMX_kQtZIHBBjP_ht8Ecf_rGvk8zL-18-VBiqVOdnltFXY6-IAdWgIbJAa-qo5XDFpoyNyJSqzR-KFcCtMKjMOvx19XGolr6jEIeWA8zB3AFlJs37MPLl9lm00)
+![](http://www.plantuml.com/plantuml/png/ZLLDJniz4Bxlhx32uPLUQQLoZI2bfL651E5Zmw5223dP8LXuxQtjBMqf_xspKuTwDaPT3YYUZ-UPPsRMFl91kj0rklXlh_yJd-UB-TM7qqhGiIZMMdelhZquyLm80OrKUYfySCfiyDoXmyW6NaqlCQFgt3VuGJdCByIziyqd6T3K_m-g0JG6oqq9pgfHtYjhAWWzsje1njHtCap54YDHGDEAWuCD672zPpR3P2fuiZyHPMsVJ2ac_qyuL3w2YYvYxUJSpHH58LUeHgw36DOedbyA7amWJcqU0a8zfb35jkMNr_DgUNA-Y3tVsy6_x50beQD-s_O_9GvXPQq6QT1MWryxHOva4AaCqaW5l89DiMdMrU2ePKFEHTUim5r9iu6KdgOt5OQyDBVau0EqsoE2rt0lEnqEzsaYES2oQyjVizUITegu0kbSdo5NcfSXZNy2TqwI_LRppIsoUd1AQlKpBWA764jS4HwvurIP9GEGvOcJltbGTGtcjXpWCj1CTAPbXHXkJLbTVrn-kPZ_sHvQgkpmUcSKfrKDZecB5YukHvyi1qDWbZ485zMRQoKEnJwjLcfu5_UB1I4luemWfQQnxhEEBE5xIDN4CuFboJ7ns6hB-i0CF9KNmtOxEoLCqN3yODMQhtxNBksW2poMavzrEgXsnnjPThsCv_sM24c6ePmcAoUIN3XbqoQnyuZyK_K8Bh3YlkBXdzy-ptkRARsCyMiwEwagTXsdIn_lRtuF9LqQHj7xKVRKT15dbvEFOWHFJcm-VLZ0M-hJQozBdRuhB6h8aDbstbTnV7g-c8lyK_SNzGubhhKrC9k9vqnVwKd3UR8KreKHuKCfsR3Y24pTDVet)
 
 <!--
 @startuml
@@ -18,14 +18,14 @@ class Survey {
   toDate: Datetime
 }
 class SubmissionSet{
-  submittedAt: Timestamp
+  created_at: Timestamp <<generated>>
 }
 User "1" -down- "*" SubmissionSet
 User "1" -down- "*" Survey
 Survey "1" - "*" SubmissionSet 
 
 abstract class Submission {}
-SubmissionSet "1" -right- "k" Submission : <<ordered>>
+SubmissionSet "1" -right- "k" Submission
 
 '##### QUESTIONS ######
 
@@ -43,7 +43,7 @@ abstract class NumberRangeQuestion {
 NumberRangeQuestion -up-|> Question
 
 abstract class RearrangeableQuestion {
-  answerOptions: string[]
+  answerOptions: string[] <<serialized>>
 }
 RearrangeableQuestion -up-|> Question
 
@@ -85,7 +85,7 @@ MultipleChoiceQuestion -up-|> RearrangeableQuestion
 class PrioQuestion {}
 PrioQuestion -up-|> RearrangeableQuestion
 class LikertQuestion {
-  questions: string[]
+  questions: string[] <<serialized>>
 }
 LikertQuestion -up-|> RearrangeableQuestion
 
@@ -97,7 +97,7 @@ class NumberSubmission {
 NumberSubmission "*" --up- "1" NumberRangeQuestion
 
 class MultipleNumberSubmission {
-  answer: number[]
+  answer: number[] <<serialized>>
 }
 MultipleNumberSubmission "*" --up- "1" RearrangeableQuestion
 
