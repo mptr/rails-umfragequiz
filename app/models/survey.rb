@@ -9,16 +9,6 @@ class Survey < ApplicationRecord
 	validate :datetime_valid_to
 
 	# eigene Validierungsmethode
-	# TODO: How to refactor?
-	def datetime_valid_from
-		if ((DateTime.parse(fromDate) rescue ArgumentError) == ArgumentError)
-			errors.add(:fromDate, "Startdatum ungültig")
-		end
-	end
-	def datetime_valid_to
-		if ((DateTime.parse(toDate) rescue ArgumentError) == ArgumentError)
-			errors.add(:toDate, "Enddatum ungültig")
-		end
-	end
+	# TODO: fromDate muss vor toDate liegen
 
 end

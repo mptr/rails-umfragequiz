@@ -6,4 +6,6 @@ class SubmissionSet < ApplicationRecord
   # TODO: 
   # - validate Timestamp
   # - lieber Timestamp aus created_at beziehen?
+  # - rails guide caching
+  # - transaction
 end
