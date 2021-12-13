@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  # TODO
+  # TODO: configure route structure like:
+    # User
+    #  ┕ Survey
+    # Survey
+    #  ┕ Question
+    #  ┕ SubmissionSet
+    #    ┕ Submission
+  # (no routes for specialized types like NPSQuestion, ColorQuestion, StringSubmission, ...)
   resources :single_choice_questions
   resources :multiple_choiche_questions
   resources :likert_questions
