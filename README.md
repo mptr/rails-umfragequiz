@@ -2,7 +2,7 @@
 
 ## Klassendiagramm:
 
-![](http://www.plantuml.com/plantuml/png/ZLJDRXen4BxxAKRqKAdI7d954KrAKHM9067XK5LLPLY7MF6kgUrjMb7UlRFJBfdrMeKz9CpFVD_yZEV61-b2NHhnzatpmQV9RBAydUP0eX1R8xs7jLSE3W90bLAR8VZWTBL3kKP39KjrKXt_HUIr-w5-KGote_ZeRFbH1bGrVuCk5Ig3xQeOpgRKtcjRvIeqQBvHXA2Asp245RfY1UKU_Id7mTK0iiA-L1aCtWswqMaFobFy_KV6H2G88JTOWDm6YDE2mr5qdGd4wTrJGAXd3WL3kBwshb1E5QEHQ7l-i9xagxlv39jENu_jeSOgYKi0s7tpK-8KDjOQ9IlK5SfldIO3cmGlYYgcT0YidqpCEQlBZN9BMUqKfwVn3Q4YAmsk5P0m5PCPzHYotwCJRuzfgQHpJOpSc2wNhFoBSdEgoxU5VVcAJEaOwdf45lKuozSVLfyNanpuVkT6OnzUkOyYqcJr7c5JJH6yNHo1D9SWj4cirC_00KYEmkEOsIBd8IYUYnXROnsF8SMvg1mRRzJuoUfjTqJrVeKRS8KZYLqut7rjWjxth2rwR8xmtxCLYrmZdkHQj2mBfoqldCcN0KpritAXazvt4kBjZ1oJsF62ubxUt-KvFmETrJfT4VuqM6DYBxfYMKDD1u1jnbdNz8hoGLsG4ZMYvvzcJ7U6luia5JjrtAS7pn_I_ptfBR3HH9E1yNG-cq3wIB-2ViF3kZMsKgCH71AJeMFSR0GFuRswm3sg8-aaRbHLrANv0m00)
+![](http://www.plantuml.com/plantuml/png/ZLNVJzim47xtNt4g3vCcHHglLSbWh9gGeFn8UPWGcjpc00idpcndR2hzt-SOP_FLeGeFgFVZlk_kyyK-DfPhsrQIVJZe_k3RV36_EJalm9kChIKt1cuDQjWm0Aoua5CmLelwqTcj2zIymd-kRQWeMlqB__WQ4WTuqAhwogrpTV-jgD0vhQAk26TL2ME4gWkq7Phf7DPYUMAdi7IfReAgSVc-nydX1B9IlTGPJ3vEQFLGHkYJXNPzCAq4nlZA3S3N5dRRWisMqMGFeiNZatLGpp4KJ64sKxf4ZMMUirxpwzjviJoxN0JH3nAswzPDwRaOW6gwdrnEOQMKH5uxNubchOKFH2SHXeedTktqOBIPX7FHLYlKDxn-H4BV7TyKQX_r1nSPncBJcmwyn0VUIdjqwE2tR0WmQvliDOVUJfguGQvrLy5NahR1Q_E2-jAFRFgPx-uT3wqPorHuWFyKMqOzAS0WJpZukoTHbbZVPpku13JD7XATmUwQPCNjb-Ntg_dRklWj6Yg4BXY6aw94JOQZdZ3S47sq3GI1UaOWN1NlxX4SmI7PfSxnYInKIDeoXpE6r8j6r2UABF6tZQSXTe2bnQ7mL4b5TA0EKagR6LncSagkHEBfan9hkkjjirGxAj1SIdxHIYkQ91fOqYZX-TmJEP8abT3GSQXALrgeM2HYZwW_5y-eBMdkPp3enquJzqFttv7xV2xEYYA-SCcMX_kQtZIHBBjP_ht8Ecf_rGvk8zL-18-VBiqVOdnltFXY6-IAdWgIbJAa-qo5XDFpoyNyJSqzR-KFcCtMKjMOvx19XGolr6jEIeWA8zB3AFlJs37MPLl9lm00)
 
 <!--
 @startuml
@@ -38,43 +38,52 @@ Survey "1" -down- "k" Question : <<ordered>>
 abstract class NumberRangeQuestion {
   from: number
   to: number
+  step: number <<default=1>>
 }
-NumberRangeQuestion -left-|> Question
+NumberRangeQuestion -up-|> Question
 
 abstract class RearrangeableQuestion {
   answerOptions: string[]
 }
-RearrangeableQuestion -right-|> Question
+RearrangeableQuestion -up-|> Question
 
+abstract class StringQuestion {}
+StringQuestion -up-|> Question
+
+RearrangeableQuestion -right[hidden]- StringQuestion
+StringQuestion -right[hidden]- NumberRangeQuestion
+ 
 '##### QUESTION-SUBTYPES ####
 
+'## NumberRangeQuestion ###
 class SliderQuestion {}
 SliderQuestion -up-|> NumberRangeQuestion
 class NumberQuestion {}
 NumberQuestion -up-|> NumberRangeQuestion
+class NPSQuestion {
+  from: number = 1
+  to: number = 10
+  step: number = 1
+}
+NPSQuestion -up-|> NumberRangeQuestion
 
+'### StringQuestion ###
 class TextQuestion {}
-TextQuestion -up-|> Question
-
-class NPSQuestion {}
-NPSQuestion -up-|> Question
-
+TextQuestion -up-|> StringQuestion
 class ColorQuestion {}
-ColorQuestion -up-|> Question
+ColorQuestion -up-|> StringQuestion
 
+'### RearrangeableQuestion ###
 class SingleChoiceQuestion {
-  upTo: 1
+  upTo: number = 1
 }
 SingleChoiceQuestion -up-|> MultipleChoiceQuestion 
-
 class MultipleChoiceQuestion {
   upTo?: number
 }
 MultipleChoiceQuestion -up-|> RearrangeableQuestion
-
 class PrioQuestion {}
 PrioQuestion -up-|> RearrangeableQuestion
-
 class LikertQuestion {
   questions: string[]
 }
@@ -85,7 +94,6 @@ LikertQuestion -up-|> RearrangeableQuestion
 class NumberSubmission {
   answer: number
 }
-NumberSubmission "*" --up- "1" NPSQuestion
 NumberSubmission "*" --up- "1" NumberRangeQuestion
 
 class MultipleNumberSubmission {
@@ -93,19 +101,17 @@ class MultipleNumberSubmission {
 }
 MultipleNumberSubmission "*" --up- "1" RearrangeableQuestion
 
-
-class TextSubmission {
+class StringSubmission {
   answer: string
 }
-TextSubmission "*" --up- "1" TextQuestion
-TextSubmission "*" --up- "1" ColorQuestion
+StringSubmission "*" --up- "1" StringQuestion
 
 '#### SUBMISSION CLONE #####
 
 abstract class Submission_ <<clone>> {}
 NumberSubmission -down-|> Submission_ 
 MultipleNumberSubmission -down-|> Submission_ 
-TextSubmission -down-|> Submission_
+StringSubmission -down-|> Submission_
 @enduml
 -->
 
