@@ -14,8 +14,14 @@ ActiveRecord::Schema.define(version: 2021_11_29_162159) do
 
   create_table "questions", force: :cascade do |t|
     t.string "type", null: false
-    t.boolean "optional"
-    t.string "description"
+    t.decimal "from"
+    t.decimal "to"
+    t.decimal "step"
+    t.integer "upTo"
+    t.string "answerOptions"
+    t.string "questions"
+    t.boolean "optional", null: false
+    t.string "description", null: false
     t.integer "survey_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -23,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_11_29_162159) do
   end
 
   create_table "submission_sets", force: :cascade do |t|
-    t.datetime "submittedAt"
+    t.datetime "submittedAt", null: false
     t.integer "user_id", null: false
     t.integer "survey_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -33,6 +39,10 @@ ActiveRecord::Schema.define(version: 2021_11_29_162159) do
   end
 
   create_table "submissions", force: :cascade do |t|
+    t.string "type", null: false
+    t.string "answer_string"
+    t.decimal "answer_number"
+    t.string "answers"
     t.integer "submission_set_id", null: false
     t.integer "question_id", null: false
     t.datetime "created_at", precision: 6, null: false

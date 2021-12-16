@@ -12,9 +12,14 @@ class CreateQuestions < ActiveRecord::Migration[6.1]
       # MultipleChoiceQuestion Felder
       t.integer :upTo
 
+      # RearrangeableQuestion Felder
+      t.string :answerOptions # json
+      # LikertQuestion Felder
+      t.string :questions # json
+
       # eigene Felder
-      t.boolean :optional
-      t.string :description
+      t.boolean :optional, null: false
+      t.string :description, null: false
       t.references :survey, null: false, foreign_key: true
 
       t.timestamps

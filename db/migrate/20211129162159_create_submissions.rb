@@ -6,8 +6,12 @@ class CreateSubmissions < ActiveRecord::Migration[6.1]
 
       # StringSubmission
       t.string :answer_string
+
       # NumberSubmission
       t.decimal :answer_number
+
+      # MultipleNumberSubmission
+      t.string :answers # json
 
       t.references :submission_set, null: false, foreign_key: true
       t.references :question, null: false, foreign_key: true
