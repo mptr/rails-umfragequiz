@@ -10,10 +10,10 @@ class CreateQuestions < ActiveRecord::Migration[6.1]
       t.decimal :step
 
       # MultipleChoiceQuestion Felder
-      t.integer :upTo
+      t.integer :up_to
 
       # RearrangeableQuestion Felder
-      t.string :answerOptions # json
+      t.string :answer_options # json
       # LikertQuestion Felder
       t.string :questions # json
 

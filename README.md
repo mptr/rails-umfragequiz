@@ -2,7 +2,7 @@
 
 ## Klassendiagramm:
 
-![](http://www.plantuml.com/plantuml/png/bLLDJnin4BtlhnY5GwLAAvLh12ajZIea21yR3XL2oCaEmSAxJcrlQPlot-kTEiNZcAxA0SNpyTwycLdxo3fXNDUeuirU_mUVfxFfrOVJ2kXO54ibh8LhYmOs1G0sGgenM6Tak_BdpZjQqU1VqtF8g3hp3NzG3lC3t1lTV1BEc_h_JZReZKvpKuIpQAIrKhSLkXvjQT37r7V2ZM7k8xs0PWq71ojiqVIUoSGdKy6Z_H6KjNvgInYz7N6eV0GLNOJQoRcR2KKX5bwDM3f8QuJDSy632SJ8rOFpK8ynLB5j-UNrj9gVdCz2p_Tsy2yxhvBGlNwzxdyAFuI5rWf5wsqrsgMHv8W64SaWZLJ02zZODqsR6WsrBEMSTSq2pPLeLnZJq_J6q9ANvXOThCFrzkZ1QxmNdNA7-pIH763PhSjV4zYUTuguGc5Cdo4MYfSXMlk4vfmaswtccrlFQj58eUJFi0XvY27YYl22cwQQM5A0F4-O_Cs3h6jiRyi4DmLDepCjAo3TchAw_ZZ_SZ7zipsqLDdXzSuWJiaQ3HD7baHSbZvQ3eQGM8OHBgfNrmeEOPzMApQyI_QBWZmluGoIKjDOzrb7vlZTnMhedC3ov91uh9LcVU06bigBORkTdP9FKNZyeEMIhtwtdkka2poMavzroidrZZUm9DwKv_sMo9EaePmcAoUGN1YfuoRH-J_oJ-KZ6iUA-qg7WMy_v0qpHPUn_vhEJggANSVnqeVxczz3KPVIA7e_ofwQBkBiSl9H_8F7ReboQjFyV0MloO_llIntzB3mg9GXi-wyiN1yUZwRGlwjUq6zynANIhSucS0cqrXwq_n0MGhlmd1uAYKRLXnXMtUD-Wq0)
+![](http://www.plantuml.com/plantuml/png/ZLLDJnin4BtxLrZXKAdIIkKQGKfBeme9miU6GuLGv6I7OE6rjxQtj8Nyzzh6szqnfjkSulbuRzxCh7raBDEshGLvj-T_zEjyCR_wT5hIS2Ha8vWnzDg0fa-4KgWP5rDghEPowywjSqXMmr_JBcQKhVu1lq8EybDwfrMzgfXrjY_CmfBNuAnMfROUQLrpOxYI9LYFjz7WOgeLirFg8vs4kg471rkGeBrdDdF9eUJ9_eGMbNgK1Psyds2eN4GicyJglJEJIGbXQwU7RInDQwHFEuA30uZcstlhe1w6KAHh-kNrl5oUd2zYr_TUuL-sJgL7z_fLu_yoDuQrKWAOTBOAp4RpuEX74MKWZG-J7cpgcgPq1JgqBELSjFKQz1MJMq3qVdvJAeCt36vmC1QQxkZ0AxXZhR27-s4YES2YROhd6UtEhugu0gQrps1hWSjWqZo2NhqqmtIYRsuThG7DcU2_uoRaCCQPou3NK-u8icG0iZnnz3VtlAf0tXO9BWBDH6TwHcYwDaLv_NdvxMB-iZx4kxFJyyueJl0AD18NBLXSZhxV3eoGMCOHBietzueUqdsqMzxm8IuO2jgHY3D66fg6keywieIVTgW6dICiJew9nqeer0TimAcu6BmmcIcv5077zuflyEwtpSggf0qu6BEVjSBovfKtqcIyYEXZn-HOS6p2anSKMIuqLyCseVD_v9_o1z0MLVVT7yQ-VfGtmjHzMEvxEZifo-6DZDO-Nk7uAXfqAOqAJqZXgVrTd5zFF8j_y9YEAASspSzNy9RyuSsNvHw-BJWgPSWiF6eiFJuzNynf_hdhKLTEuaOe2RDPl6EGhFYiFSzG2kx2U7Wg9Hj6Za1MRIt-0000)
 
 <!--
 @startuml
@@ -14,8 +14,8 @@ class User {
 }
 class Survey {
   name: string
-  fromDate: Datetime
-  toDate: Datetime
+  from_date: DateTime
+  to_date: DateTime
 }
 class SubmissionSet{
   created_at: Timestamp <<generated>>
@@ -43,7 +43,7 @@ abstract class NumberRangeQuestion {
 NumberRangeQuestion -up-|> Question
 
 abstract class RearrangeableQuestion {
-  answerOptions: string[] <<serialized>>
+  answer_options: string[] <<serialized>>
 }
 RearrangeableQuestion -up-|> Question
 
@@ -75,11 +75,11 @@ ColorQuestion -up-|> StringQuestion
 
 '### RearrangeableQuestion ###
 class SingleChoiceQuestion {
-  upTo: number = 1
+  up_to: number = 1
 }
 SingleChoiceQuestion -up-|> MultipleChoiceQuestion 
 class MultipleChoiceQuestion {
-  upTo?: number
+  up_to?: number
 }
 MultipleChoiceQuestion -up-|> RearrangeableQuestion
 class PrioQuestion {}
