@@ -2,8 +2,8 @@
 
 one:
   answer: MyString
-  text_question: one
+  string_question: one
 
 two:
   answer: MyString
-  text_question: two
+  string_question: two
