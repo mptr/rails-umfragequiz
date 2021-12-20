@@ -7,4 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 u = User.create(username: "Testuser", email: "test@user.com")
-u.surveys.create(name: "TestSurvey", fromDate: DateTime.now, toDate: DateTime.now)
+u.surveys.create(name: "TestSurvey", from_date: DateTime.now, to_date: DateTime.now)
