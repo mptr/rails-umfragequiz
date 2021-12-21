@@ -1,9 +1,11 @@
 class SubmissionSetsController < ApplicationController
+  before_action :get_survey
   before_action :set_submission_set, only: [:show, :update, :destroy]
 
   # GET /submission_sets
   def index
-    @submission_sets = SubmissionSet.all
+    # @submission_sets = SubmissionSet.all
+    @submission_sets = @survey.submission_set
 
     render json: @submission_sets
   end
@@ -16,6 +18,7 @@ class SubmissionSetsController < ApplicationController
   # POST /submission_sets
   def create
     @submission_set = SubmissionSet.new(submission_set_params)
+    @survey.submission_sets.append(@submission_set)
 
     if @submission_set.save
       render json: @submission_set, status: :created, location: @submission_set
@@ -39,6 +42,10 @@ class SubmissionSetsController < ApplicationController
   end
 
   private
+    def get_survey
+      @survey = Survey.find(params[:survey_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_submission_set
       @submission_set = SubmissionSet.find(params[:id])

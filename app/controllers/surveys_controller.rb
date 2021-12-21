@@ -1,9 +1,21 @@
 class SurveysController < ApplicationController
+  before_action :get_user
   before_action :set_survey, only: [:show, :update, :destroy]
+
+  # creates a post object that's associated with the specific user instance from the get_user method
+  def new
+    @survey = @user.survey.build
+  end
 
   # GET /surveys
   def index
-    @surveys = Survey.all
+    # wenn es über user aufgerufen wird, gib nur die surveys des users an
+    if @user
+      @surveys = @user.surveys
+    # sonst gib alle verfügbaren surveys an (user-unabhängig)
+    else
+      @surveys = Survey.all
+    end
 
     render json: @surveys
   end
@@ -16,6 +28,7 @@ class SurveysController < ApplicationController
   # POST /surveys
   def create
     @survey = Survey.new(survey_params)
+    @user.survey.append(@survey)
 
     if @survey.save
       render json: @survey, status: :created, location: @survey
@@ -39,9 +52,21 @@ class SurveysController < ApplicationController
   end
 
   private
+    def get_user
+      if params[:user_id] == nil
+        @user = nil
+      else
+        @user = User.find(params[:user_id])
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_survey
-      @survey = Survey.find(params[:id])
+      if @user
+        @survey = @user.survey.find(params[:id])
+      else
+        @survey = Survey.find(params[:id])
+      end
     end
 
     # Only allow a list of trusted parameters through.

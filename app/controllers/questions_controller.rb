@@ -1,9 +1,11 @@
 class QuestionsController < ApplicationController
+  before_action :get_survey
   before_action :set_question, only: [:show, :update, :destroy]
 
   # GET /questions
   def index
-    @questions = Question.all
+    # @questions = Question.all
+    @question = @survey.questions
 
     render json: @questions
   end
@@ -16,6 +18,7 @@ class QuestionsController < ApplicationController
   # POST /questions
   def create
     @question = Question.new(question_params)
+    @survey.questions.append(@question)
 
     if @question.save
       render json: @question, status: :created, location: @question
@@ -39,6 +42,10 @@ class QuestionsController < ApplicationController
   end
 
   private
+    def get_survey
+      @survey = Survey.find(params[:survey_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_question
       @question = Question.find(params[:id])
@@ -46,6 +53,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:optional, :description, :survey_id)
+      params.require(:question).permit(:optional, :description, :survey_id, :type)
     end
 end
