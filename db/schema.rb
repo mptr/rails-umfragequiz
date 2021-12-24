@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 2021_11_29_162159) do
     t.decimal "from"
     t.decimal "to"
     t.decimal "step"
-    t.integer "upTo"
-    t.string "answerOptions"
+    t.integer "up_to"
+    t.string "answer_options"
     t.string "questions"
     t.boolean "optional", null: false
     t.string "description", null: false
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 2021_11_29_162159) do
   end
 
   create_table "submission_sets", force: :cascade do |t|
-    t.datetime "submittedAt", null: false
     t.integer "user_id", null: false
     t.integer "survey_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -53,8 +52,8 @@ ActiveRecord::Schema.define(version: 2021_11_29_162159) do
 
   create_table "surveys", force: :cascade do |t|
     t.string "name"
-    t.datetime "fromDate"
-    t.datetime "toDate"
+    t.datetime "from_date"
+    t.datetime "to_date"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

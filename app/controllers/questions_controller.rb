@@ -5,8 +5,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   def index
     # @questions = Question.all
-    @question = @survey.questions
-
+    @questions = @survey.questions
     render json: @questions
   end
 
@@ -21,7 +20,7 @@ class QuestionsController < ApplicationController
     @survey.questions.append(@question)
 
     if @question.save
-      render json: @question, status: :created, location: @question
+      render json: @question, status: :created
     else
       render json: @question.errors, status: :unprocessable_entity
     end
@@ -48,11 +47,22 @@ class QuestionsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_question
-      @question = Question.find(params[:id])
+      @question = @survey.questions.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:optional, :description, :survey_id, :type)
+      permits = [:optional, :description, :survey_id, :type] # general question params
+      case params[:type]
+        when 'SingleChoiceQuestion'
+          permits.append(:answer_options)
+        when 'MultipleChoiceQuestion'
+          permits.append(:up_to, :answer_options)
+        when "LikertQuestion"
+          permits.append(:questions, :answer_options)
+        when "SliderQuestion", "NumberQuestion"
+          permits.append(:from, :to, :step)
+      end
+      params.require(:question).permit(permits)
     end
 end
