@@ -5,7 +5,7 @@ class SubmissionsController < ApplicationController
   # GET /submissions
   def index
     # @submissions = Submission.all
-    @submissions = @submission_set.submission
+    @submissions = @submission_set.submissions
 
     render json: @submissions
   end
@@ -21,7 +21,7 @@ class SubmissionsController < ApplicationController
     @submission_set.submissions.append(@submission)
 
     if @submission.save
-      render json: @submission, status: :created, location: @submission
+      render json: @submission, status: :created
     else
       render json: @submission.errors, status: :unprocessable_entity
     end
@@ -53,6 +53,6 @@ class SubmissionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def submission_params
-      params.require(:submission).permit(:submission_set_id, :question_id)
+      params.require(:submission).permit(:submission_set_id, :question_id, :type, :answer)
     end
 end

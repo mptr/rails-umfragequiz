@@ -5,7 +5,7 @@ class SubmissionSetsController < ApplicationController
   # GET /submission_sets
   def index
     # @submission_sets = SubmissionSet.all
-    @submission_sets = @survey.submission_set
+    @submission_sets = @survey.submission_sets
 
     render json: @submission_sets
   end
@@ -21,7 +21,7 @@ class SubmissionSetsController < ApplicationController
     @survey.submission_sets.append(@submission_set)
 
     if @submission_set.save
-      render json: @submission_set, status: :created, location: @submission_set
+      render json: @submission_set, status: :created
     else
       render json: @submission_set.errors, status: :unprocessable_entity
     end
