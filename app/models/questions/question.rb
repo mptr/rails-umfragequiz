@@ -8,6 +8,8 @@ class Question < ApplicationRecord
     super.as_json(options).merge({type:type})
   end
 
+  attribute :type
+  
   # validation
   validates :optional, inclusion: { in: [ true, false ] }
   validates :description, presence: true

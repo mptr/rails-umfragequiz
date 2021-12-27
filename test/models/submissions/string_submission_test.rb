@@ -1,6 +1,6 @@
 require "test_helper"
 
-class TextSubmissionTest < ActiveSupport::TestCase
+class StringSubmissionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

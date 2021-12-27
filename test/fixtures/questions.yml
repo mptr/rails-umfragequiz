@@ -1,11 +1,130 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+textQuestion1:
+  type: TextQuestion
   optional: false
-  description: MyString
+  description: "What is your favourite Ice Cream?"
   survey: one
 
-two:
+textQuestion2:
+  type: TextQuestion
+  optional: true
+  description: "What is your current place of residence?"
+  survey: two
+
+colorQuestion1:
+  type: ColorQuestion
+  optional: true
+  description: "What is your favourite color?"
+  survey: one
+
+colorQuestion2:
+  type: ColorQuestion
   optional: false
-  description: MyString
+  description: "To prove you are a human, enter the color of the sky:"
+  survey: two
+
+sliderQuestion1:
+  type: SliderQuestion
+  optional: false
+  description: "What is your current room temperature in °C?"
+  from: -20
+  to: 50
+  survey: one
+
+sliderQuestion2:
+  type: SliderQuestion
+  optional: true
+  description: "How many hours of sleep did you get last night?"
+  from: 0
+  to: 24
+  step: 0.5
+  survey: two
+
+numberQuestion1:
+  type: NumberQuestion
+  optional: true
+  description: "Whats your age?"
+  from: 0
+  to: 100
+  step: 1
+  survey: one
+
+numberQuestion2:
+  type: NumberQuestion
+  optional: false
+  description: "How many siblings do you have?"
+  from: 0
+  to: 10
+  step: 1
+  survey: two
+
+NpsQuestion1:
+  type: NpsQuestion
+  optional: false
+  description: "How likely are you to recommend this survey to a friend?"
+  survey: one
+
+NpsQuestion2:
+  type: NpsQuestion
+  optional: true
+  description: "How likely are you to order a pizza this week?"
+  survey: two
+
+SingleChoiceQuestion1:
+  type: SingleChoiceQuestion
+  optional: true
+  description: "What is the operating system of your mobile phone?"
+  answer_options: "[\"Android\",\"iOS\",\"Windows Phone\",\"other\"]"
+  survey: one
+
+SingleChoiceQuestion2:
+  type: SingleChoiceQuestion
+  optional: false
+  description: "What is your favourite programming language?"
+  answer_options: "[\"Java\",\"C++\",\"Python\",\"Ruby\",\"JavaScript\",\"PHP\",\"C#\",\"Go\",\"other\"]"
+  survey: two
+
+MultipleChoiceQuestion1:
+  type: MultipleChoiceQuestion
+  optional: false
+  description: "Which pets do you have?"
+  answer_options: "[\"cat\",\"dog\",\"bird\",\"fish\",\"other\"]"
+  survey: one
+
+MultipleChoiceQuestion2:
+  type: MultipleChoiceQuestion
+  optional: true
+  description: "Select up to three of your favourite vacation destinations:"
+  answer_options: "[\"Hills\",\"Beach\",\"Home\",\"Woods\",\"Urban\",\"Island\",\"other\"]"
+  survey: two
+
+PrioQuestion1:
+  type: PrioQuestion
+  optional: true
+  description: "Order these primes ascending:"
+  answer_options: "[2,5,13,17,29,37]"
+  survey: one
+
+PrioQuestion2:
+  type: PrioQuestion
+  optional: false
+  description: "Order these historical events from oldest to latest:"
+  answer_options: "[\"iPhone\", \"steam engine\", \"dinosaurs\", \"you filling this survey\", \"big bang\"]"
+  survey: two
+
+LikertQuestion1:
+  type: LikertQuestion
+  optional: false
+  description: "How much do you like these foods?"
+  answer_options: "[\"very much\",\"quite a bit\",\"not much\",\"not at all\"]"
+  questions: '["Broccoli", "Bananas", "Chocolate", "Burger", "Salad", "Pizza"]'
+  survey: one
+
+LikertQuestion2:
+  type: LikertQuestion
+  optional: true
+  description: "How much do you like these Computer Games?"
+  answer_options: "[\"very much\",\"quite a bit\",\"not much\",\"not at all\",\"don't know\"]"
+  questions: "[\"PacMan\",\"Snake\",\"Tetris\",\"Minecraft\",\"Counter Strike\",\"Doom\",\"Chrome Offline-Game (dino)\"]"
   survey: two
