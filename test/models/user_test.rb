@@ -41,12 +41,12 @@ class UserTest < ActiveSupport::TestCase
 		assert_not u2.save, "Email is not unique but duplicate"
 	end
 
-	test "Survey association" do
+	test "User associations" do
 		u = User.new
 		u.username = "Testuser01"
 		u.email = "testuser@mydomain.com"
 		
 		assert_equal 0, u.surveys.length, "new User already has associated surveys"
-		# u.surveys.append(Survey.first)
+		assert_equal 0, u.submission_sets.length, "new User already has associated submissions"
 	end 
 end
