@@ -7,3 +7,7 @@ one:
 two:
   username: User02
   email: user02@umfragequiz.net
+
+three:
+  username: User03
+  email: user03@umfragequiz.net
