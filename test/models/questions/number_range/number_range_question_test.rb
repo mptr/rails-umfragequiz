@@ -1,7 +1,15 @@
-require "test_helper"
+require 'test_helper'
 
 class NumberRangeQuestionTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @q = NumberRangeQuestion.new(
+      description: 'TestQuestion',
+      survey: Survey.first,
+      optional: false,
+      from: 1,
+      to: 10,
+      step: 1
+    )
+  end
+  include AbstractClassTest
 end
