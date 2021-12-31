@@ -1,7 +1,8 @@
-require "test_helper"
+require 'test_helper'
 
 class SubmissionTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @q = Submission.new(submission_set: SubmissionSet.first, question: Question.first)
+  end
+  include AbstractClassTest
 end
