@@ -1,7 +1,15 @@
-require "test_helper"
+require 'test_helper'
 
 class StringQuestionTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @q =
+      StringQuestion.new(
+        description: 'TestQuestion',
+        survey: Survey.first,
+        optional: false
+      )
+  end
+
+  # only test if @q class is abstract
+  include AbstractClassTest
 end
