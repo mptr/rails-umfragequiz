@@ -1,8 +1,6 @@
 require 'test_helper'
 
-class SliderQuestionTest < NumberQuestionTest
-  # just do same tests as in NumberQuestionTest
-  # but with different class
+class SliderQuestionTest < ActiveSupport::TestCase
   def setup
     @q =
       SliderQuestion.new(
@@ -14,4 +12,8 @@ class SliderQuestionTest < NumberQuestionTest
         step: 1
       )
   end
+
+  include QuestionTests
+
+  include NumberRangeQuestionTests
 end
