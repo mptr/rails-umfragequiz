@@ -1,3 +1,3 @@
-class ColorQuestion < Question
+class ColorQuestion < StringQuestion
 end
 ColorQuestion.is_abstract = false
