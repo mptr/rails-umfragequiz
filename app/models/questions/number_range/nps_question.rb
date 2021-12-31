@@ -6,3 +6,4 @@ class NpsQuestion < Question
         self.step = 1
     end
 end
+NpsQuestion.is_abstract = false
