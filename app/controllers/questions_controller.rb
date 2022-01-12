@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1
   def show
-    @question["type"] = "adhjkafdjoil"
+    # @question["type"] = "adhjkafdjoil"
     render json: @question
   end
 
