@@ -41,3 +41,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # needed to sort questions in survey
 gem 'acts_as_list'
+
+# token authentication
+gem 'jwt', '~> 1.5.0'
+gem 'warden', '~> 1.2.0'
