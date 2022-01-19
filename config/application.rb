@@ -45,7 +45,7 @@ module Umfragequiz
         end
         
         config.middleware.insert_after ActionDispatch::ParamsParser, Warden::Manager do |manager|
-            manager.default_strategies :azure_ad_json_web_token
+            manager.default_strategies :json_web_token
             manager.failure_app = UnauthorizedController
         end
     end

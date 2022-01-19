@@ -1,7 +1,5 @@
 require "test_helper"
 
 class SubmissionTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+	# not testable because of different subclasses
 end

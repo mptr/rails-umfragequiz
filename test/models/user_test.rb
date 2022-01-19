@@ -46,7 +46,15 @@ class UserTest < ActiveSupport::TestCase
 		u.username = "Testuser01"
 		u.email = "testuser@mydomain.com"
 		
-		assert_equal 0, u.surveys.length, "new User already has associated surveys"
+		assert_equal 0, u.surveys.length, "new User already has associated Surveys"
 		# u.surveys.append(Survey.first)
 	end 
+
+	test "SubmissionSet association" do
+		u = User.new
+		u.username = "Testuser01"
+		u.email = "testuser@mydomain.com"
+
+		assert_equal 0, u.submission_sets.length, "new User already has associated SubmissionSets"
+	end
 end
