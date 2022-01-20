@@ -33,11 +33,15 @@ module Umfragequiz
         # config.eager_load_paths << Rails.root.join("extras")
 
         # Models are organized in sub-directories
-        config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**/}')]
+        config.eager_load_paths += Dir[Rails.root.join('app', 'models', '{**/}')]
 
         # Only loads a smaller set of middleware suitable for API only apps.
         # Middleware like session, flash, cookies can be added back manually.
         # Skip views, helpers and assets when generating a new resource.
         config.api_only = true
+
+        config.after_initialize do
+            Rails.application.eager_load!
+        end
     end
 end

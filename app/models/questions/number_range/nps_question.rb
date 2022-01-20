@@ -1,4 +1,4 @@
-class NpsQuestion < Question
+class NpsQuestion < NumberRangeQuestion
     before_save :default_values
     def default_values
         self.from = 1
