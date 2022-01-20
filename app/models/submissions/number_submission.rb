@@ -15,3 +15,4 @@ class NumberSubmission < Submission
         end
     end
 end
+NumberSubmission.is_abstract = false

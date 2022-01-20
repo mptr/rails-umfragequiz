@@ -1,7 +1,7 @@
 class NumberRangeQuestion < Question
     has_many :number_submissions
 
-    before_save :default_values
+    before_validation :default_values
     def default_values
         self.step ||= 1
     end

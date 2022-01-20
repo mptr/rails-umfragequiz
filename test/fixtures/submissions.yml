@@ -1,0 +1,187 @@
+# Survey one, User two
+s1u2TextSubmission:
+  submission_set: s1u2
+  question: TextQuestion1
+  type: StringSubmission
+  answer_string: Chocolate
+s1u2ColorSubmission:
+  submission_set: s1u2
+  question: ColorQuestion1
+  type: StringSubmission
+  answer_string: red
+s1u2SliderSubmission:
+  submission_set: s1u2
+  question: SliderQuestion1
+  type: NumberSubmission
+  answer_number: 19
+s1u2NumberSubmission:
+  submission_set: s1u2
+  question: NumberQuestion1
+  type: NumberSubmission
+  answer_number: 20
+s1u2NpsSubmission:
+  submission_set: s1u2
+  question: NpsQuestion1
+  type: NumberSubmission
+  answer_number: 9
+s1u2SingleChoiceSubmission:
+  submission_set: s1u2
+  question: SingleChoiceQuestion1
+  type: MultipleNumberSubmission
+  answers: "[0]"
+s1u2MultipleChoiceSubmission:
+  submission_set: s1u2
+  question: MultipleChoiceQuestion1
+  type: MultipleNumberSubmission
+  answers: "[2,4]"
+s1u2PrioSubmission:
+  submission_set: s1u2
+  question: PrioQuestion1
+  type: MultipleNumberSubmission
+  answers: "[3,5,1,4,0,2]"
+s1u2LikertSubmission:
+  submission_set: s1u2
+  question: LikertQuestion1
+  type: MultipleNumberSubmission
+  answers: "[1,3,2,4,0,2]"
+
+# Survey two, User one
+s2u1TextSubmission:
+  submission_set: s2u1
+  question: TextQuestion2
+  type: StringSubmission
+  answer_string: Wiesbaden
+s2u1ColorSubmission:
+  submission_set: s2u1
+  question: ColorQuestion2
+  type: StringSubmission
+  answer_string: blue
+s2u1SliderSubmission:
+  submission_set: s2u1
+  question: SliderQuestion2
+  type: NumberSubmission
+  answer_number: 7.5
+s2u1NumberSubmission:
+  submission_set: s2u1
+  question: NumberQuestion2
+  type: NumberSubmission
+  answer_number: 0
+s2u1NpsSubmission:
+  submission_set: s2u1
+  question: NpsQuestion2
+  type: NumberSubmission
+  answer_number: 10
+s2u1SingleChoiceSubmission:
+  submission_set: s2u1
+  question: SingleChoiceQuestion2
+  type: MultipleNumberSubmission
+  answers: "[1]"
+s2u1MultipleChoiceSubmission:
+  submission_set: s2u1
+  question: MultipleChoiceQuestion2
+  type: MultipleNumberSubmission
+  answers: "[2,3,4]"
+s2u1PrioSubmission:
+  submission_set: s2u1
+  question: PrioQuestion2
+  type: MultipleNumberSubmission
+  answers: "[4,2,1,0,3]"
+s2u1LikertSubmission:
+  submission_set: s2u1
+  question: LikertQuestion2
+  type: MultipleNumberSubmission
+  answers: "[1,3,2,0,4,2,1]"
+
+# Survey one, User three
+s1u3TextSubmission:
+  submission_set: s1u3
+  question: TextQuestion1
+  type: StringSubmission
+  answer_string: Strawberry
+s1u3ColorSubmission:
+  submission_set: s1u3
+  question: ColorQuestion1
+  type: StringSubmission
+  answer_string: green
+s1u3SliderSubmission:
+  submission_set: s1u3
+  question: SliderQuestion1
+  type: NumberSubmission
+  answer_number: 21
+s1u3NumberSubmission:
+  submission_set: s1u3
+  question: NumberQuestion1
+  type: NumberSubmission
+  answer_number: 25
+s1u3NpsSubmission:
+  submission_set: s1u3
+  question: NpsQuestion1
+  type: NumberSubmission
+  answer_number: 10
+s1u3SingleChoiceSubmission:
+  submission_set: s1u3
+  question: SingleChoiceQuestion1
+  type: MultipleNumberSubmission
+  answers: "[3]"
+s1u3MultipleChoiceSubmission:
+  submission_set: s1u3
+  question: MultipleChoiceQuestion1
+  type: MultipleNumberSubmission
+  answers: "[2,3]"
+s1u3PrioSubmission:
+  submission_set: s1u3
+  question: PrioQuestion1
+  type: MultipleNumberSubmission
+  answers: "[3,5,1,4,0,2]"
+s1u3LikertSubmission:
+  submission_set: s1u3
+  question: LikertQuestion1
+  type: MultipleNumberSubmission
+  answers: "[3,1,0,1,0,1]"
+
+# Survey two, User three
+s2u3TextSubmission:
+  submission_set: s2u3
+  question: TextQuestion2
+  type: StringSubmission
+  answer_string: Mainz
+s2u3ColorSubmission:
+  submission_set: s2u3
+  question: ColorQuestion2
+  type: StringSubmission
+  answer_string: skyblue
+s2u3SliderSubmission:
+  submission_set: s2u3
+  question: SliderQuestion2
+  type: NumberSubmission
+  answer_number: 6.5
+s2u3NumberSubmission:
+  submission_set: s2u3
+  question: NumberQuestion2
+  type: NumberSubmission
+  answer_number: 2
+s2u3NpsSubmission:
+  submission_set: s2u3
+  question: NpsQuestion2
+  type: NumberSubmission
+  answer_number: 7
+s2u3SingleChoiceSubmission:
+  submission_set: s2u3
+  question: SingleChoiceQuestion2
+  type: MultipleNumberSubmission
+  answers: "[4]"
+s2u3MultipleChoiceSubmission:
+  submission_set: s2u3
+  question: MultipleChoiceQuestion2
+  type: MultipleNumberSubmission
+  answers: "[0,4,5]"
+s2u3PrioSubmission:
+  submission_set: s2u3
+  question: PrioQuestion2
+  type: MultipleNumberSubmission
+  answers: "[4,2,1,0,3]"
+s2u3LikertSubmission:
+  submission_set: s2u3
+  question: LikertQuestion2
+  type: MultipleNumberSubmission
+  answers: "[2,3,1,0,2,4,1]"

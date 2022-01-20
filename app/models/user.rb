@@ -9,3 +9,4 @@ class User < ApplicationRecord
         message: ' - gültige E-Mail-Adresse verwenden!'
     }
 end
+User.is_abstract = false

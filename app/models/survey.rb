@@ -12,3 +12,4 @@ class Survey < ApplicationRecord
 		end
 	end
 end
+Survey.is_abstract = false

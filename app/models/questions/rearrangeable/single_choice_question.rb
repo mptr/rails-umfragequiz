@@ -4,3 +4,4 @@ class SingleChoiceQuestion < MultipleChoiceQuestion
         self.up_to = 1
     end
 end
+SingleChoiceQuestion.is_abstract = false
