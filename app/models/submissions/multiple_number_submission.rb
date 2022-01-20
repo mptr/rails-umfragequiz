@@ -3,3 +3,4 @@ class MultipleNumberSubmission < Submission
 
     attribute :answers, :json_list
 end
+MultipleNumberSubmission.is_abstract = false

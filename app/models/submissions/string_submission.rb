@@ -3,3 +3,4 @@ class StringSubmission < Submission
 
     alias_attribute :answer, :answer_string
 end
+StringSubmission.is_abstract = false

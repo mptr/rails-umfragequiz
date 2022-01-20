@@ -11,3 +11,11 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+# a test case that checks if saving an instance of an abstract class is prevented
+# requires @q to be defined as the question to be tested
+module AbstractClassTest
+  def test_should_be_abstract_class
+    assert_not @q.save, 'Saved instance of abstract class'
+  end
+end
