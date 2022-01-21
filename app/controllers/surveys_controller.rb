@@ -63,7 +63,7 @@ class SurveysController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_survey
       if @user
-        @survey = @user.survey.find(params[:id])
+        @survey = @user.surveys.find(params[:id])
       else
         @survey = Survey.find(params[:id])
       end
@@ -71,6 +71,6 @@ class SurveysController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def survey_params
-      params.require(:survey).permit(:name, :fromDate, :toDate, :user_id)
+      params.require(:survey).permit(:name, :from_date, :to_date, :user_id)
     end
 end

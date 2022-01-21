@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
       # validation with microsoft
     # else
       # reject w 403
-    puts request.headers['HTTP_AUTHORIZATION']
+    #puts request.headers['HTTP_AUTHORIZATION']
     render :nothing => true, :status => 403 unless request.headers['HTTP_AUTHORIZATION']
   end
 end
