@@ -41,3 +41,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # needed to sort questions in survey
 gem 'acts_as_list'
+
+gem 'google-id-token'

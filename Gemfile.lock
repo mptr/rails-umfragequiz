@@ -72,8 +72,11 @@ GEM
     ffi (1.15.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    google-id-token (1.4.2)
+      jwt (>= 1)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
+    jwt (2.3.0)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -152,6 +155,7 @@ DEPENDENCIES
   acts_as_list
   bootsnap (>= 1.4.4)
   byebug
+  google-id-token
   listen (~> 3.3)
   puma (~> 5.0)
   rack-cors

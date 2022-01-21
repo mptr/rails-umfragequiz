@@ -3,7 +3,11 @@ require "test_helper"
 class SurveysControllerTest < ActionDispatch::IntegrationTest
   setup do
     @survey = surveys(:one)
+    @user = @survey.user
+    @token = @user.email # jwt token TODO
   end
+
+
 
   test "should get index" do
     get surveys_url, as: :json
@@ -35,4 +39,7 @@ class SurveysControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 204
   end
+
+  # user.email == requester_email?
+
 end
