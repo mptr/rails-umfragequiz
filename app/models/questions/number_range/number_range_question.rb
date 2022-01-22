@@ -1,5 +1,5 @@
 class NumberRangeQuestion < Question
-    has_many :number_submissions, dependent: :destroy
+    # has_many :number_submissions, dependent: :destroy, as: :question
 
     before_validation :default_values
     def default_values
