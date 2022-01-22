@@ -41,7 +41,7 @@ class ApplicationController < ActionController::API
     validator = GoogleIDToken::Validator.new
     begin
       payload = validator.check(token, "709962217448-ecjl8ic8hafu4sbu14l11tefrg927jmi.apps.googleusercontent.com")
-      puts payload
+      # puts payload
       @requester_email = payload['email']
       @requester_username = payload['name']
     rescue GoogleIDToken::ValidationError => e

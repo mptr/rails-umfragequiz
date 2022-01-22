@@ -5,7 +5,7 @@ class SubmissionSetsController < ApplicationController
   # GET /submission_sets
   def index
     # only survey owner can see all submission_sets
-    require_requester_to_be(@submission_set.survey.user)
+    require_requester_to_be(@survey.user)
 
     @submission_sets = @survey.submission_sets
     render json: @submission_sets
