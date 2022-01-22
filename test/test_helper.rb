@@ -11,7 +11,7 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   def generate_token_for(u)
-    "magically-generated #{u.email} #{u.username}"
+    "Bearer magically-generated #{u.email} #{u.username}"
   end
 end
 

@@ -30,18 +30,17 @@ class SurveysControllerTest < ActionDispatch::IntegrationTest
   # user darf: survey erstellen, verändern (submitten)
   # owner darf: lesen, löschen
 
-  # test "should get index" do
-  #   get surveys_url, as: :json
-  #   assert_response :success
-  # end
+  test "should get index" do
+    get surveys_url, as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}
+    assert_response :success
+  end
 
   test "should create survey" do
     assert_difference('Survey.count') do
-      post surveys_url, params: { survey: { fromDate: @survey.fromDate, name: @survey.name, toDate: @survey.toDate, user_id: @survey.user_id } }, as: :json
+      post surveys_url, params: { survey: { fromDate: @survey.fromDate, name: @survey.name, toDate: @survey.toDate, user_id: @survey.user_id } }, as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}
     end
-
-  #   assert_response 201
-  # end
+    assert_response 201
+  end
 
   # test "should show survey" do
   #   get survey_url(@survey), as: :json
