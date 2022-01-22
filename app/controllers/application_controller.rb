@@ -23,9 +23,9 @@ class ApplicationController < ActionController::API
 
     # fake token if in dev or test environment
     if Rails.env == "development" || Rails.env == "test" then
-      if token.first == "magically-generated" then
-        @requester_email = token.second
+      if token.second == "magically-generated" then
         @requester_username = token.third
+        @requester_email = token.fourth
         return
       end
     end  
