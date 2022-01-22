@@ -10,6 +10,9 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def generate_token_for(u)
+    "magically-generated #{u.email} #{u.username}"
+  end
 end
 
 # a test case that checks if saving an instance of an abstract class is prevented

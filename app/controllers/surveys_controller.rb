@@ -48,7 +48,12 @@ class SurveysController < ApplicationController
 
   # DELETE /surveys/1
   def destroy
-    @survey.destroy
+    # owner == requesting user ?
+    if @survey.user.email == @requester_email then
+      @survey.destroy
+    else
+      render :nothing => true, :status => 403
+    end
   end
 
   private

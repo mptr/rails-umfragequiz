@@ -12,7 +12,18 @@ class ApplicationController < ActionController::API
     # else
       # reject w 403
 
-    token = request.headers['HTTP_AUTHORIZATION']&.split(' ')&.second
+    token = request.headers['HTTP_AUTHORIZATION']&.split(' ')
+
+    # fake token if in dev or test environment
+    if Rails.env == "development" || Rails.env == "test" then
+      if token.first == "magically-generated" then
+        @requester_email = token.second
+        @requester_username = token.third
+        return
+      end
+    end  
+
+    token = token&.second
 
     # kein Token
     if token.nil? then

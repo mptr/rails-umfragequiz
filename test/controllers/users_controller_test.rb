@@ -14,6 +14,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+### standard tests
+
   # test "should get index" do
   #   get users_url, as: :json
   #   assert_response :success
