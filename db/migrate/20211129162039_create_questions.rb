@@ -14,6 +14,7 @@ class CreateQuestions < ActiveRecord::Migration[6.1]
 
       # RearrangeableQuestion Felder
       t.string :answer_options # json
+      t.boolean :random_order, null: false
       # LikertQuestion Felder
       t.string :questions # json
 
