@@ -10,6 +10,9 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    # user can only show himself
+    # require_requester_to_be(@user) # TODO
+
     render json: @user
   end
 
@@ -26,6 +29,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    # require_requester ?
     if @user.update(user_params)
       render json: @user
     else

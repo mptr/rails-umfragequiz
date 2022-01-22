@@ -1,7 +1,7 @@
 class Survey < ApplicationRecord
 	belongs_to :user
-	has_many :questions, -> { order(position: :asc) }
-	has_many :submission_sets
+	has_many :questions, -> { order(position: :asc) }, dependent: :destroy
+	has_many :submission_sets, dependent: :destroy
 
 	# validation
 	validates :name, presence: true, uniqueness: true

@@ -8,7 +8,6 @@ class SurveysControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "only owner should update survey" do
-    #patch survey_url(@survey), params: { survey: { fromDate: @survey.fromDate, name: @survey.name, toDate: @survey.toDate, user_id: @survey.user_id } }, as: :json
     patch survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@not_owner)}, params: { survey: { name: @survey.name, user_id: @survey.user_id } }
     assert_response 403
 
@@ -36,10 +35,10 @@ class SurveysControllerTest < ActionDispatch::IntegrationTest
   #   assert_response :success
   # end
 
-  # test "should create survey" do
-  #   assert_difference('Survey.count') do
-  #     post surveys_url, params: { survey: { fromDate: @survey.fromDate, name: @survey.name, toDate: @survey.toDate, user_id: @survey.user_id } }, as: :json
-  #   end
+  test "should create survey" do
+    assert_difference('Survey.count') do
+      post surveys_url, params: { survey: { fromDate: @survey.fromDate, name: @survey.name, toDate: @survey.toDate, user_id: @survey.user_id } }, as: :json
+    end
 
   #   assert_response 201
   # end
