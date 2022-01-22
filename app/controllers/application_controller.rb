@@ -3,6 +3,13 @@ class ApplicationController < ActionController::API
   @requester_email = nil
   @requester_username = nil
 
+  def require_requester_to_be(u)
+    if u.email != @requester_email then
+      render :nothing => true, :status => 403
+      return
+    end
+  end
+
   def check_auth
     # decode middle jwt part
     # if iss == 'google'
@@ -12,7 +19,18 @@ class ApplicationController < ActionController::API
     # else
       # reject w 403
 
-    token = request.headers['HTTP_AUTHORIZATION']&.split(' ')&.second
+    token = request.headers['HTTP_AUTHORIZATION']&.split(' ')
+
+    # fake token if in dev or test environment
+    if Rails.env == "development" || Rails.env == "test" then
+      if token.second == "magically-generated" then
+        @requester_username = token.third
+        @requester_email = token.fourth
+        return
+      end
+    end  
+
+    token = token&.second
 
     # kein Token
     if token.nil? then

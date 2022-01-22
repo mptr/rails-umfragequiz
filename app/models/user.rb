@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-    has_many :surveys
-    has_many :submission_sets
+    has_many :surveys, dependent: :destroy
+    has_many :submission_sets, dependent: :destroy
 
     # validation
     validates :username, presence: true, uniqueness: true # format validation missing because

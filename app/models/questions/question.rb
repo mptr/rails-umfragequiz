@@ -1,5 +1,6 @@
 class Question < ApplicationRecord
   belongs_to :survey
+  has_many :submissions, dependent: :destroy
   acts_as_list scope: :survey
 
   # sends className aka type of question as name of object

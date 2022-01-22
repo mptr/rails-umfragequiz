@@ -1,5 +1,5 @@
 class MultipleNumberSubmission < Submission
-    belongs_to :rearrangeable_question
+    #belongs_to :rearrangeable_question
 
     attribute :answers, :json_list
     alias_attribute :answer, :answers

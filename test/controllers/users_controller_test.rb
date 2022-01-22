@@ -14,10 +14,15 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # test "should get index" do
-  #   get users_url, as: :json
-  #   assert_response :success
-  # end
+  test "should show user" do
+    get user_url(@user), as: :json
+    assert_response 403
+
+    get users_url(@user), as: :json, headers:{"HTTP_AUTHORIZATION" => @token}
+    assert_response :success
+  end
+
+### standard tests
 
   # test "should create user" do
   #   assert_difference('User.count') do

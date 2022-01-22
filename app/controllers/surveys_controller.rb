@@ -9,10 +9,10 @@ class SurveysController < ApplicationController
 
   # GET /surveys
   def index
-    # wenn es über user aufgerufen wird, gib nur die surveys des users an
+    # if it is called via user, only show the users surveys
     if @user
       @surveys = @user.surveys
-    # sonst gib alle verfügbaren surveys an (user-unabhängig)
+    # otherwise show all available surveys (user-independent)
     else
       @surveys = Survey.all
     end
@@ -39,15 +39,23 @@ class SurveysController < ApplicationController
 
   # PATCH/PUT /surveys/1
   def update
+    # only survey owner can update a survey
+    require_requester_to_be(@survey.user)
+
     if @survey.update(survey_params)
       render json: @survey
+      return
     else
       render json: @survey.errors, status: :unprocessable_entity
+      return
     end
   end
 
   # DELETE /surveys/1
   def destroy
+    # only survey owner can destroy a survey
+    require_requester_to_be(@survey.user)
+    
     @survey.destroy
   end
 

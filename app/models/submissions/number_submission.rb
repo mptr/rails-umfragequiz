@@ -1,5 +1,5 @@
 class NumberSubmission < Submission
-    belongs_to :number_range_question
+    #belongs_to :number_range_question
 
     alias_attribute :answer, :answer_number
 
