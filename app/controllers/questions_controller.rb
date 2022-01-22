@@ -4,19 +4,20 @@ class QuestionsController < ApplicationController
 
   # GET /questions
   def index
-    # @questions = Question.all
     @questions = @survey.questions
     render json: @questions
   end
 
   # GET /questions/1
   def show
-    # @question["type"] = "adhjkafdjoil"
     render json: @question
   end
 
   # POST /questions
   def create
+    # only survey owner can create a question
+    require_requester_to_be(@question.survey.user)
+
     @question = Question.new(question_params)
     @survey.questions.append(@question)
 
@@ -29,6 +30,9 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /questions/1
   def update
+    # only survey owner can update a question
+    require_requester_to_be(@question.survey.user)
+
     if @question.update(question_params)
       render json: @question
     else
@@ -38,6 +42,9 @@ class QuestionsController < ApplicationController
 
   # DELETE /questions/1
   def destroy
+    # only survey owner can destroy a question
+    require_requester_to_be(@question.survey.user)
+    
     @question.destroy
   end
 

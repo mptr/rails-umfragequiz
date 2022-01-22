@@ -4,14 +4,19 @@ class SubmissionsController < ApplicationController
 
   # GET /submissions
   def index
-    # @submissions = Submission.all
-    @submissions = @submission_set.submissions
+    # only survey owner can see all submissions
+    require_requester_to_be(@submission.submission_set.survey.user)
 
+    @submissions = @submission_set.submissions
     render json: @submissions
   end
 
   # GET /submissions/1
   def show
+    # survey owner and the person who created the submission can show it
+    if @submission.submission_set.survey.user.email != requester_email || @submission.submission_set.user != requester_email then
+      render :nothing => true, :status => 403
+    end
     render json: @submission
   end
 
@@ -29,6 +34,9 @@ class SubmissionsController < ApplicationController
 
   # PATCH/PUT /submissions/1
   def update
+    # only the person who created the submission can update it (not survey owner)
+    require_requester_to_be(@submission.submission_set.user)
+
     if @submission.update(submission_params)
       render json: @submission
     else
@@ -38,6 +46,9 @@ class SubmissionsController < ApplicationController
 
   # DELETE /submissions/1
   def destroy
+    # only the person who created the submission can destroy it (not survey owner)
+    require_requester_to_be(@submission.submission_set.user)
+    
     @submission.destroy
   end
 

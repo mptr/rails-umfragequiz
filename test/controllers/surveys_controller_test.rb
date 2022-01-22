@@ -7,6 +7,27 @@ class SurveysControllerTest < ActionDispatch::IntegrationTest
     @survey = @owner.surveys.first
   end
 
+  test "only owner should update survey" do
+    #patch survey_url(@survey), params: { survey: { fromDate: @survey.fromDate, name: @survey.name, toDate: @survey.toDate, user_id: @survey.user_id } }, as: :json
+    patch survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@not_owner)}, params: { survey: { name: @survey.name, user_id: @survey.user_id } }
+    assert_response 403
+
+    patch survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}, params: { survey: { name: @survey.name, user_id: @survey.user_id } }
+    assert_response :success
+  end
+
+  # löschen mit Token, aber nicht owner => X
+  # löschen mit Token und owner => success
+  test "only owner should destroy survey" do
+    delete survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@not_owner)}
+    assert_response 403
+    
+    delete survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}
+    assert_response :success
+  end
+
+### standard tests
+
   # user darf: survey erstellen, verändern (submitten)
   # owner darf: lesen, löschen
 
@@ -40,16 +61,4 @@ class SurveysControllerTest < ActionDispatch::IntegrationTest
 
   #   assert_response 204
   # end
-
-  # löschen mit Token, aber nicht owner => X
-  # löschen mit Token und owner => success
-  
-  # user.email == requester_email?
-  test "owner should delete survey" do
-    delete survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@not_owner)}
-    assert_response 403
-    
-    delete survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}
-    assert_response :success
-  end
 end

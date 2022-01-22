@@ -3,6 +3,13 @@ class ApplicationController < ActionController::API
   @requester_email = nil
   @requester_username = nil
 
+  def require_requester_to_be(u)
+    if u.email != @requester_email then
+      render :nothing => true, :status => 403
+      return
+    end
+  end
+
   def check_auth
     # decode middle jwt part
     # if iss == 'google'
