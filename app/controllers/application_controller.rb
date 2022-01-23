@@ -27,7 +27,7 @@ class ApplicationController < ActionController::API
         @requester_email = token.fourth
         return
       end
-    end  
+    end
 
     token = token&.second
 

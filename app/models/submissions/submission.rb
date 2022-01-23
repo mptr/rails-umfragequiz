@@ -15,8 +15,8 @@ class Submission < ApplicationRecord
 
     # validation all questions answered
 
-    before_validation :all_questions_answered
-    before_destroy :all_questions_answered
+    # before_validation :all_questions_answered
+    # before_destroy :all_questions_answered
 
 	def all_questions_answered
 		if question.survey.questions.length == submission_set.submissions.length
