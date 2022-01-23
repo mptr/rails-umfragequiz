@@ -27,8 +27,19 @@ class SurveysController < ApplicationController
 
   # POST /surveys
   def create
+    if @user == nil
+      render :nothing => true, :status => 400
+      return
+    end
+
     @survey = Survey.new(survey_params)
-    @user.survey.append(@survey)
+    puts "######################################"
+    puts survey_params
+    survey_params[:questions].each_with_index{|val, index|
+      @survey.questions.append(Question.new(val))
+    }
+    # @survey.questions.append(survey_params[:questions])
+    @user.surveys.append(@survey)
 
     if @survey.save
       render json: @survey, status: :created, location: @survey
@@ -79,6 +90,22 @@ class SurveysController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def survey_params
-      params.require(:survey).permit(:name, :from_date, :to_date, :user_id)
+      # params.require(:survey).permit(:name, :from_date, :to_date, :user_id, questions:[:optional, :description, :survey_id, :type, :answer_options, :random_order, :up_to, :questions, :from, :to, :step])
+      params.require(:survey).permit(:name, :from_date, :to_date, :user_id, questions:[:optional, :description])
     end
+
+    # def question_params(q_data)
+    #   permits = [:optional, :description, :survey_id, :type] # general question params
+    #   case q_data[:type]
+    #     when 'SingleChoiceQuestion'
+    #       permits.append(:answer_options, :random_order)
+    #     when 'MultipleChoiceQuestion'
+    #       permits.append(:up_to, :answer_options, :random_order)
+    #     when "LikertQuestion"
+    #       permits.append(:questions, :answer_options, :random_order)
+    #     when "SliderQuestion", "NumberQuestion"
+    #       permits.append(:from, :to, :step)
+    #   end
+    #   q_data.permit(permits)
+    # end
 end

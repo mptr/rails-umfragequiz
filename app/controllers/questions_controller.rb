@@ -15,37 +15,37 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   def create
-    # only survey owner can create a question
-    require_requester_to_be(@question.survey.user)
+    render :nothing => true, :status => 405
+    # require_requester_to_be(@question.survey.user)
 
-    @question = Question.new(question_params)
-    @survey.questions.append(@question)
+    # @question = Question.new(question_params)
+    # @survey.questions.append(@question)
 
-    if @question.save
-      render json: @question, status: :created
-    else
-      render json: @question.errors, status: :unprocessable_entity
-    end
+    # if @question.save
+    #   render json: @question, status: :created
+    # else
+    #   render json: @question.errors, status: :unprocessable_entity
+    # end
   end
 
   # PATCH/PUT /questions/1
   def update
-    # only survey owner can update a question
-    require_requester_to_be(@question.survey.user)
+    render :nothing => true, :status => 405
+    # require_requester_to_be(@question.survey.user)
 
-    if @question.update(question_params)
-      render json: @question
-    else
-      render json: @question.errors, status: :unprocessable_entity
-    end
+    # if @question.update(question_params)
+    #   render json: @question
+    # else
+    #   render json: @question.errors, status: :unprocessable_entity
+    # end
   end
 
   # DELETE /questions/1
   def destroy
-    # only survey owner can destroy a question
-    require_requester_to_be(@question.survey.user)
+    render :nothing => true, :status => 405
+    # require_requester_to_be(@question.survey.user)
     
-    @question.destroy
+    # @question.destroy
   end
 
   private

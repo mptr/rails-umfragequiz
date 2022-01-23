@@ -22,34 +22,40 @@ class SubmissionsController < ApplicationController
 
   # POST /submissions
   def create
-    @submission = Submission.new(submission_params)
-    @submission_set.submissions.append(@submission)
+    render :nothing => true, :status => 405
 
-    if @submission.save
-      render json: @submission, status: :created
-    else
-      render json: @submission.errors, status: :unprocessable_entity
-    end
+    # @submission = Submission.new(submission_params)
+    # @submission_set.submissions.append(@submission)
+
+    # if @submission.save
+    #   render json: @submission, status: :created
+    # else
+    #   render json: @submission.errors, status: :unprocessable_entity
+    # end
   end
 
   # PATCH/PUT /submissions/1
   def update
-    # only the person who created the submission can update it (not survey owner)
-    require_requester_to_be(@submission.submission_set.user)
+    render :nothing => true, :status => 405
 
-    if @submission.update(submission_params)
-      render json: @submission
-    else
-      render json: @submission.errors, status: :unprocessable_entity
-    end
+    # only the person who created the submission can update it (not survey owner)
+    # require_requester_to_be(@submission.submission_set.user)
+
+    # if @submission.update(submission_params)
+    #   render json: @submission
+    # else
+    #   render json: @submission.errors, status: :unprocessable_entity
+    # end
   end
 
   # DELETE /submissions/1
   def destroy
+    render :nothing => true, :status => 405
+
     # only the person who created the submission can destroy it (not survey owner)
-    require_requester_to_be(@submission.submission_set.user)
+    # require_requester_to_be(@submission.submission_set.user)
     
-    @submission.destroy
+    # @submission.destroy
   end
 
   private
