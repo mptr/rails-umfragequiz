@@ -1,6 +1,4 @@
 require 'test_helper'
-require_relative '../question_test'
-require_relative 'number_range_question_test'
 
 class NpsQuestionTest < ActiveSupport::TestCase
   def setup
