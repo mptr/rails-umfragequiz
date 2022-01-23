@@ -1,22 +1,22 @@
-require "test_helper"
+require 'test_helper'
 
 class QuestionsControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    #@question = questions(:TextQuestion1)
-  end
+	setup do
+		#@question = questions(:TextQuestion1)
+	end
 
-  # Fragen unterschiedlicher Surveys dürfen nicht gleich sein
-  test "should not get all questions" do
-    s1 = surveys(:one)
-    s2 = surveys(:two)
+	# Fragen unterschiedlicher Surveys dürfen nicht gleich sein
+	test 'should not get all questions' do
+		s1 = surveys(:one)
+		s2 = surveys(:two)
 
-    get survey_url(s1) + "/questions", as: :json
-    r1 = response.body
-    get survey_url(s2) + "/questions", as: :json
-    r2 = response.body
+		get survey_url(s1) + '/questions', as: :json
+		r1 = response.body
+		get survey_url(s2) + '/questions', as: :json
+		r2 = response.body
 
-    assert_not_equal r1, r2
-  end
+		assert_not_equal r1, r2
+	end
 end
 ### standard tests
 

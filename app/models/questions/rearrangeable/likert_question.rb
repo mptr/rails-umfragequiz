@@ -1,4 +1,4 @@
 class LikertQuestion < RearrangeableQuestion
-    attribute :questions, :json_list
+	attribute :questions, :json_list
 end
 LikertQuestion.is_abstract = false

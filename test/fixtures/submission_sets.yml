@@ -1,17 +1,15 @@
-
 s1u2:
-  survey: one
-  user: two
+    survey: one
+    user: two
 
 s1u3:
-  survey: one
-  user: three
+    survey: one
+    user: three
 
 s2u1:
-  survey: two
-  user: one
+    survey: two
+    user: one
 
 s2u3:
-  survey: two
-  user: three
-
+    survey: two
+    user: three

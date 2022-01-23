@@ -6,9 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-s = Survey.create(name: "TestSurvey", from_date: DateTime.now, to_date: DateTime.now)
+s =
+	Survey.create(
+		name: 'TestSurvey',
+		from_date: DateTime.now,
+		to_date: DateTime.now
+	)
 
-u = User.create(username: "Testuser", email: "test@user.com")
+u = User.create(username: 'Testuser', email: 'test@user.com')
 
 u.surveys.append(s)
 u.save

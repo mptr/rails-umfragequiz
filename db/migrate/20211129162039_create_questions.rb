@@ -1,29 +1,30 @@
 class CreateQuestions < ActiveRecord::Migration[6.1]
-  def change
-    create_table :questions do |t|
-      # STI Feld
-      t.string :type, null: false
-    
-      # NumberRangeQuestion Felder
-      t.decimal :from
-      t.decimal :to
-      t.decimal :step
+	def change
+		create_table :questions do |t|
+			# STI Feld
+			t.string :type, null: false
 
-      # MultipleChoiceQuestion Felder
-      t.integer :up_to
+			# NumberRangeQuestion Felder
+			t.decimal :from
+			t.decimal :to
+			t.decimal :step
 
-      # RearrangeableQuestion Felder
-      t.string :answer_options # json
-      t.boolean :random_order
-      # LikertQuestion Felder
-      t.string :questions # json
+			# MultipleChoiceQuestion Felder
+			t.integer :up_to
 
-      # eigene Felder
-      t.boolean :optional, null: false
-      t.string :description, null: false
-      t.references :survey, null: false, foreign_key: true
+			# RearrangeableQuestion Felder
+			t.string :answer_options # json
+			t.boolean :random_order
 
-      t.timestamps
-    end
-  end
+			# LikertQuestion Felder
+			t.string :questions # json
+
+			# eigene Felder
+			t.boolean :optional, null: false
+			t.string :description, null: false
+			t.references :survey, null: false, foreign_key: true
+
+			t.timestamps
+		end
+	end
 end

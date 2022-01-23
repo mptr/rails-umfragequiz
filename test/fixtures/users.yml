@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  username: User01
-  email: user01@umfragequiz.net
+    username: User01
+    email: user01@umfragequiz.net
 
 two:
-  username: User02
-  email: user02@umfragequiz.net
+    username: User02
+    email: user02@umfragequiz.net
 
 three:
-  username: User03
-  email: user03@umfragequiz.net
+    username: User03
+    email: user03@umfragequiz.net

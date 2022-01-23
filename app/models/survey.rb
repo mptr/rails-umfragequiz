@@ -8,7 +8,7 @@ class Survey < ApplicationRecord
 	validate :from_date_before_to_date
 	def from_date_before_to_date
 		if from_date.present? && to_date.present? && from_date > to_date
-			errors.add(:from_date, "from_date must be before to_date")
+			errors.add(:from_date, 'from_date must be before to_date')
 		end
 	end
 end
