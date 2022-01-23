@@ -9,7 +9,7 @@ class Submission < ApplicationRecord
     end
     
     attribute :type
-    
+   
     # validation
     validates :answer, presence: true
 
