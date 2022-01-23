@@ -7,7 +7,9 @@ class Question < ApplicationRecord
   # ActiveRecord::Base.include_root_in_json = true
 
   def as_json options={}
-    super.as_json(options).merge({type:type})
+      options[:methods] ||= []
+      options[:methods] += [:type]
+      super.as_json(options)
   end
 
   attribute :type

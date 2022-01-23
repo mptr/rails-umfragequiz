@@ -15,7 +15,7 @@ class SubmissionSetsController < ApplicationController
   def show
     # survey owner and the person who submitted can see a submission_set
     if @submission_set.survey.user.email != requester_email || @submission_set.user != requester_email then
-      render :nothing => true, :status => 403
+      return render :nothing => true, :status => 403
     end
     render json: @submission_set
   end
