@@ -13,22 +13,29 @@ class SubmissionSetsController < ApplicationController
 
   # GET /submission_sets/1
   def show
-    # survey owner and the person who submitted can see a submission_set
-    if @submission_set.survey.user.email != requester_email || @submission_set.user != requester_email then
-      return render :nothing => true, :status => 403
-    end
-    render json: @submission_set
+      # survey owner and the person who submitted can see a submission_set
+      if @submission_set.survey.user.email != requester_email || @submission_set.user != requester_email then
+        return render :nothing => true, :status => 403
+      end
+      render json: @submission_set
   end
 
   # POST /submission_sets
   def create
-    @submission_set = SubmissionSet.new(submission_set_params)
-    @survey.submission_sets.append(@submission_set)
-
-    if @submission_set.save
-      render json: @submission_set, status: :created
-    else
-      render json: @submission_set.errors, status: :unprocessable_entity
+    ActiveRecord::Base.transaction do
+      @submission_set = SubmissionSet.new(submission_set_params)
+      @submission_set.survey = @survey
+      if !@submission_set.save
+        return render json: @submission_set.errors, status: :unprocessable_entity
+      end
+      submission_params[:submissions].each_with_index{|val, index|
+        s = Submission.new(val)
+        s.submission_set = @submission_set
+        if !s.save
+          return render json: s.errors, status: :unprocessable_entity
+        end
+      }
+      render json: @submission_set, status: 200
     end
   end
 
@@ -65,5 +72,12 @@ class SubmissionSetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def submission_set_params
       params.require(:submission_set).permit(:submittedAt, :user_id, :survey_id)
+    end
+    def submission_params
+      params.permit(
+        submissions: [
+          :type, :answer, answer: [],
+        ]
+      )
     end
 end

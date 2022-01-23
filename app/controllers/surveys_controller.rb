@@ -28,23 +28,24 @@ class SurveysController < ApplicationController
   # POST /surveys
   def create
     if @user == nil
-      render :nothing => true, :status => 400
-      return
+      return render :nothing => true, :status => 400
     end
-
-    @survey = Survey.new(survey_params)
-    puts "######################################"
-    puts survey_params
-    survey_params[:questions].each_with_index{|val, index|
-      @survey.questions.append(Question.new(val))
-    }
-    # @survey.questions.append(survey_params[:questions])
-    @user.surveys.append(@survey)
-
-    if @survey.save
-      render json: @survey, status: :created, location: @survey
-    else
-      render json: @survey.errors, status: :unprocessable_entity
+    ActiveRecord::Base.transaction do
+      @survey = Survey.new(survey_params)
+      @survey.user = @user
+      if @survey.save
+      else
+        return render json: @survey.errors, status: :unprocessable_entity
+      end
+      question_params[:questions].each_with_index{|val, index|
+        q = Question.new(val)
+        q.survey = @survey
+        if q.save
+        else
+          return render json: @survey.errors, status: :unprocessable_entity
+        end
+      }
+      render json: @survey, status: 200
     end
   end
 
@@ -88,24 +89,16 @@ class SurveysController < ApplicationController
       end
     end
 
-    # Only allow a list of trusted parameters through.
     def survey_params
-      # params.require(:survey).permit(:name, :from_date, :to_date, :user_id, questions:[:optional, :description, :survey_id, :type, :answer_options, :random_order, :up_to, :questions, :from, :to, :step])
-      params.require(:survey).permit(:name, :from_date, :to_date, :user_id, questions:[:optional, :description])
+        params.require(:survey).permit(
+          :name, :from_date, :to_date, :user_id
+        )
     end
-
-    # def question_params(q_data)
-    #   permits = [:optional, :description, :survey_id, :type] # general question params
-    #   case q_data[:type]
-    #     when 'SingleChoiceQuestion'
-    #       permits.append(:answer_options, :random_order)
-    #     when 'MultipleChoiceQuestion'
-    #       permits.append(:up_to, :answer_options, :random_order)
-    #     when "LikertQuestion"
-    #       permits.append(:questions, :answer_options, :random_order)
-    #     when "SliderQuestion", "NumberQuestion"
-    #       permits.append(:from, :to, :step)
-    #   end
-    #   q_data.permit(permits)
-    # end
+    def question_params
+      params.permit(
+        questions: [
+          :optional, :description, :position, :survey_id, :type, :random_order, :up_to, :from, :to, :step, answer_options: [], questions: []
+        ]
+      )
+    end
 end

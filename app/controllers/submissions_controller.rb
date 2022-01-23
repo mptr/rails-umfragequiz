@@ -23,39 +23,16 @@ class SubmissionsController < ApplicationController
   # POST /submissions
   def create
     render :nothing => true, :status => 405
-
-    # @submission = Submission.new(submission_params)
-    # @submission_set.submissions.append(@submission)
-
-    # if @submission.save
-    #   render json: @submission, status: :created
-    # else
-    #   render json: @submission.errors, status: :unprocessable_entity
-    # end
   end
 
   # PATCH/PUT /submissions/1
   def update
     render :nothing => true, :status => 405
-
-    # only the person who created the submission can update it (not survey owner)
-    # require_requester_to_be(@submission.submission_set.user)
-
-    # if @submission.update(submission_params)
-    #   render json: @submission
-    # else
-    #   render json: @submission.errors, status: :unprocessable_entity
-    # end
   end
 
   # DELETE /submissions/1
   def destroy
     render :nothing => true, :status => 405
-
-    # only the person who created the submission can destroy it (not survey owner)
-    # require_requester_to_be(@submission.submission_set.user)
-    
-    # @submission.destroy
   end
 
   private
@@ -66,10 +43,5 @@ class SubmissionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_submission
       @submission = Submission.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def submission_params
-      params.require(:submission).permit(:submission_set_id, :question_id, :type, :answer)
     end
 end
