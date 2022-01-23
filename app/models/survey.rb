@@ -5,6 +5,8 @@ class Survey < ApplicationRecord
 
 	# validation
 	validates :name, presence: true, uniqueness: true
+	validates :from_date, presence: true
+	validates :to_date, presence: true
 	validate :from_date_before_to_date
 	def from_date_before_to_date
 		if from_date.present? && to_date.present? && from_date > to_date

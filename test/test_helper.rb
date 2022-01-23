@@ -33,7 +33,7 @@ module RearrangeableQuestionTests
 		@q.answer_options = []
 		assert_not @q.save, 'Saved without answer_options'
 		@q.answer_options.append('TestAnswerOption')
-		assert @q.save, 'Failed to save with an answer_option'
+		assert @q.save!, 'Failed to save with an answer_option'
 	end
 
 	def test_should_keep_order_of_answer_options
@@ -103,5 +103,9 @@ module NumberRangeQuestionTests
 		@q.to = 10
 		@q.from = nil
 		assert_not @q.save, 'Saved without from'
+
+		@q.to = 10
+		@q.from = 1
+		assert @q.save, 'Failed to save with valid from&to'
 	end
 end
