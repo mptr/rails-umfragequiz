@@ -23,6 +23,9 @@ class SubmissionSetsController < ApplicationController
   # POST /submission_sets
   def create
     ActiveRecord::Base.transaction do
+      if submission_params[:submissions].length != @survey.questions.length then
+        return render :nothing => true, :status => 400
+      end
       @submission_set = SubmissionSet.new(submission_set_params)
       @submission_set.survey = @survey
       if !@submission_set.save
