@@ -32,23 +32,6 @@ class SubmissionSetTest < ActiveSupport::TestCase
 		       'Failed to save submission set with missing submission to optional question'
 	end
 
-	test 'can leave optional questions blank' do
-		sset = SubmissionSet.first
-
-		# get an optional question
-		q = sset.survey.questions.where(optional: true).first
-
-		# get the submission for that question
-		s = sset.submissions.where(question: q).first
-
-		# delete this submission
-		s.delete
-
-		# save the submission set
-		assert_not sset.save,
-		           'Failed to save submission set with missing submission to optional question'
-	end
-
 	test 'should have submissions acessible through question.submissions' do
 		sset = SubmissionSet.first
 		%w[TextQuestion NumberQuestion SingleChoiceQuestion].each do |qtype|
