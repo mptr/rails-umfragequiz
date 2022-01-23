@@ -4,7 +4,7 @@ class SurveysControllerTest < ActionDispatch::IntegrationTest
 	setup do
 		@owner = users(:one)
 		@not_owner = users(:two)
-		@survey = @owner.surveys.first
+		@survey = @owner.surveys.sample
 	end
 
 	# alle
@@ -27,19 +27,23 @@ class SurveysControllerTest < ActionDispatch::IntegrationTest
 	# alle
 	test 'should create survey' do
 		assert_difference('Survey.count') do
-			post surveys_url,
+			post surveys_url_with_user(@owner),
 			     params: {
 					survey: {
-						name: @survey.name,
-						user_id: @survey.user_id
-					}
+						name: @survey.name + " next",
+						user_id: @survey.user_id,
+						
+					},
+					questions: [
+							{type: "TextQuestion", description: "Testquestion01", optional: false},
+					]
 			     },
 			     as: :json,
 			     headers: {
 					'HTTP_AUTHORIZATION' => generate_token_for(@owner)
 			     }
-		end
-		assert_response 201
+				 assert_response 201
+				end
 	end
 
 	# owner und submitter

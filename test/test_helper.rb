@@ -11,7 +11,25 @@ class ActiveSupport::TestCase
 
 	# Add more helper methods to be used by all tests here...
 	def generate_token_for(u)
-		"Bearer magically-generated #{u.email} #{u.username}"
+		"Bearer magically-generated #{u.username} #{u.email}"
+	end
+	def question_url(q)
+		"/surveys/#{q.survey.id}/questions/#{q.id}"
+	end
+	def submissions_url(ss)
+		"/surveys/#{ss.survey.id}/submission_sets/#{ss.id}/submissions"
+	end
+	def submission_url(s)
+		"/surveys/#{s.submission_set.survey.id}/submission_sets/#{s.submission_set.id}/submissions/#{s.id}"
+	end
+	def submission_sets_url(s)
+		"/surveys/#{s.id}/submission_sets"
+	end
+	def submission_set_url(ss)
+		"/surveys/#{ss.survey.id}/submission_sets/#{ss.id}"
+	end
+	def surveys_url_with_user(u)
+		"/users/#{u.id}/surveys"
 	end
 end
 

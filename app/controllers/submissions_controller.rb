@@ -5,8 +5,10 @@ class SubmissionsController < ApplicationController
 	# GET /submissions
 	def index
 		# only survey owner can see all submissions
-		require_requester_to_be(@submission_set.survey.user)
-
+		if @submission_set.survey.user.email != @requester_email &&
+				@submission_set.user.email != @requester_email
+			return render nothing: true, status: 403
+		end
 		@submissions = @submission_set.submissions
 		render json: @submissions
 	end
@@ -14,9 +16,9 @@ class SubmissionsController < ApplicationController
 	# GET /submissions/1
 	def show
 		# survey owner and the person who created the submission can show it
-		if @submission.submission_set.survey.user.email != requester_email ||
-				@submission.submission_set.user != requester_email
-			render nothing: true, status: 403
+		if @submission.submission_set.survey.user.email != @requester_email &&
+				@submission.submission_set.user.email != @requester_email
+			return render nothing: true, status: 403
 		end
 		render json: @submission
 	end

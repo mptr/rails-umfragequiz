@@ -4,7 +4,7 @@ class Submission < ApplicationRecord
 
 	def as_json(options = {})
 		options[:methods] ||= []
-		options[:methods] += %i[type answer]
+		options[:methods] += [:type, :answer]
 		super.as_json(options)
 	end
 

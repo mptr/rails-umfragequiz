@@ -31,9 +31,7 @@ class SurveysController < ApplicationController
 		ActiveRecord::Base.transaction do
 			@survey = Survey.new(survey_params)
 			@survey.user = @user
-			if @survey.save
-
-			else
+			if !@survey.save
 				return(
 					render json: @survey.errors, status: :unprocessable_entity
 				)
@@ -50,14 +48,14 @@ class SurveysController < ApplicationController
 					)
 				end
 			end
-			render json: @survey, status: 200
+			render json: @survey, status: :created
 		end
 	end
 
 	# PATCH/PUT /surveys/1
 	def update
 		# only survey owner can update a survey
-		require_requester_to_be(@survey.user)
+		require_requester_to_be(@survey.user) and return
 
 		if @survey.update(survey_params)
 			render json: @survey
@@ -71,7 +69,7 @@ class SurveysController < ApplicationController
 	# DELETE /surveys/1
 	def destroy
 		# only survey owner can destroy a survey
-		require_requester_to_be(@survey.user)
+		require_requester_to_be(@survey.user) and return
 
 		@survey.destroy
 	end

@@ -38,7 +38,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 			     },
 			     as: :json,
 			     headers: {
-					'HTTP_AUTHORIZATION' => generate_token_for(@user)
+					'HTTP_AUTHORIZATION' => generate_token_for(User.new(email: "newuser@umfragequiz.net", username: "newuser"))
 			     }
 		end
 

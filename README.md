@@ -2,7 +2,7 @@
 
 ## Klassendiagramm:
 
-![](http://www.plantuml.com/plantuml/png/ZLLDJnin4BtlhnY5GwLAAvLh12ajZIea21yR3XL2aPCTWeNNJcrlQKlvxvqrJl4iZheSK3mVxysycRMFd1VMjuqgtkrrV_1rEfjUVJgj81oBOgM4St3jqC9J0O2Da6eCpbkfrtHkoQ55W_zCpp6ZQkqF_1Loc1_WpffcKGjFjY_qVouR9AitFLk2j6oaSzBe2ds7jx98CVL2-35qaTH2iu63WpLgj9rdCg7aKF9eVmHbRHvr2QFt8mwLZmXb5x7wpfd9XA8GI-f7h3pqQuIdvu871n0hr_UUe1vIg68h-kNrj9gVdC-Ywdjly2zRwZAWK_zcq_qKD8QbCGg59bkDRcLbS2IZY6qaFL81hs1Z4itO6csGhCyvQvibsYkXryZek_cDGGTl65noS1utsoE1rtWdMkKFzyD4Se1bkod_J61xVbF45GfhkmonLBmCeTqZsiMB66xRzCqjqJgqKYZvEsu2mnZCN0Myu8vZPPOCG9OdZlxcNjOrwjkoXyj0Cz4PpGhehqrPNN-UVxkOlgnFsAhiz3fdR4x96YrhZbbYSrdwP3iO0hCCGRYeTkuL7C8-swtEy84jM0mYNi8PG1f4O-epHURuqwVTi7E4vSanyTWemtJW1fxAYyaj39iIfIWylZTonNU_tIoywSd0WpdxMQkytBpnHXhcpH1zt38H2u_jy_26k4uNLffK9dOUa7yg7z1wLjrtElptw-TvkvdI-vY-fxEJgc8tShhsyGhdLr6YKZygF25bHntkuknwybaCuCaroz9t5h2h-_JYor8dJmkFwZDazfth2iUdvxCfv5-xLzG5jRXIHkDa0ayPNSEhHlDaAKo50U6ibLrXnH7gkctKNm00)
+![](http://www.plantuml.com/plantuml/png/ZLLDJnin4BtxLup2eLAbe7AD8AMbKOK4uMF3eK8eSdQ7nC9hfrvleONyzzh60K-yHE60ulbuR-PvTdpSM6viMqlsQS__mS_HU7JzxQo0S6IibBnfuAP10yyC06ikv00QQuIQktFh78hN-6PQnOoYDN_mRyWXVe1xe-jfnQsp_N3_9w96PxLwmvOWpMhHD4Ah0gt7Amswc6hAxG1yf6kXNiBXuHmL6kyP3broABbtq8D-fHzL7tgVUnIgAoAMpMBrmPbd0cDyvlhXfOND6k5vnMXm035Ylh0EwY65OclHhsv6nUJqOXnLtylmhrhNPK1d07hfVt8vW9dM4hbojWgRqeZWIAuYjf7qw0fu1niuqRIfq7Z9CivnMy_GN7CrHqBlxsy0AdZ3nIM7nk9oVNJW5TxpLjgZWt0ZNO3zTjb_6SBwd1LnZTmOdy5dafR1LVE8PlegHhDk-lREqJPe19VYNsWBmELNRkH2f--QhHZ1thcY8l2ybx9Yr983TFB4aRXTYAf2TTVVmAMWUNI7bWmsnwbVt7oV_BeSlOuLy-wkHF3Es9mKJYJI7BN4vhheawaX2DIo0y9byU6ymH4Sa9dpXYzny4ZGYgKuMqY3Q4HzeiW4dspQ3Jb7M9eS4q-qr4G7Qg2ff1Woz9stv58adYoqAEatqIwdLc_8G8Cf-tahhLXctaX3lJdHrpMJOo6n6GzjYEfqQOHEPIBd7VBFn0CQIwhx7GzRjiAAaRmjJEcUTj_J-MbHa4sTZdrSxNH59IfbKVvfwNjglwExnvFUnGuyNSrsfsS5VD1zklWwgPCd9ukY3FcyKrtXvEnYF7eLTyihEtKjbb8h70xXETSrldOlGvAIgx0zFBQoFIn-id2g5cY4vQf4k1TFuMjz6wxziBttapnsZAfgQ_aV)
 
 <!--
 @startuml
@@ -44,6 +44,7 @@ NumberRangeQuestion -up-|> Question
 
 abstract class RearrangeableQuestion {
   answer_options: string[] <<serialized>>
+  random_order: boolean
 }
 RearrangeableQuestion -up-|> Question
 
@@ -112,20 +113,9 @@ abstract class Submission_ <<clone>> {}
 NumberSubmission -down-|> Submission_ 
 MultipleNumberSubmission -down-|> Submission_ 
 StringSubmission -down-|> Submission_
+
+'###  Inheritance fix ###
+Question .right. Submission
 @enduml
 -->
 
-Testscript:
-```rb
-u = User.create(username: "user1", email: "user1@surveys.com")
-
-s = u.surveys.create(name: "TestSurvey", fromDate: DateTime.now, toDate: DateTime.now)
-
-# kein direktes s.questions.create(...) möglich, da sonst nicht klar ist, welcher Question-Typ generiert wird.
-q1 = TextQuestion.create(optional: false, description: "Whats your name?")
-s.questions.append(q1)
-
-q2 = ColorQuestion.create(optional: true, description: "Whats yout favourite color?")
-s.questions.append(q2)
-
-```

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
 	@requester_username = nil
 
 	def require_requester_to_be(u)
-		render nothing: true, status: 403 if u.email != @requester_email
+		render nothing: true, status: 403 and return true if u.email != @requester_email
 	end
 
 	def check_auth

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 	# GET /users/1
 	def show
 		# user can only show himself
-		# require_requester_to_be(@user) # TODO
+		# require_requester_to_be(@user) and return # TODO
 
 		render json: @user
 	end
