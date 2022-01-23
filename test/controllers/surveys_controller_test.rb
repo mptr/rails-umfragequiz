@@ -32,7 +32,8 @@ class SurveysControllerTest < ActionDispatch::IntegrationTest
 					survey: {
 						name: @survey.name + " next",
 						user_id: @survey.user_id,
-						
+						from_date: DateTime.yesterday,
+						to_date: DateTime.tomorrow,
 					},
 					questions: [
 							{type: "TextQuestion", description: "Testquestion01", optional: false},
