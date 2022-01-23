@@ -5,6 +5,7 @@ class QuestionsControllerTest < ActionDispatch::IntegrationTest
     #@question = questions(:TextQuestion1)
   end
 
+  # Fragen unterschiedlicher Surveys dürfen nicht gleich sein
   test "should not get all questions" do
     s1 = surveys(:one)
     s2 = surveys(:two)

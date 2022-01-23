@@ -7,6 +7,33 @@ class SurveysControllerTest < ActionDispatch::IntegrationTest
     @survey = @owner.surveys.first
   end
 
+  # alle
+  test "should get index" do
+    get surveys_url, as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@not_owner)}
+    assert_response :success
+
+    get surveys_url, as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}
+    assert_response :success
+  end
+
+  # alle
+  test "should create survey" do
+    assert_difference('Survey.count') do
+      post surveys_url, params: { survey: { name: @survey.name, user_id: @survey.user_id } }, as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}
+    end
+    assert_response 201
+  end
+
+  # owner und submitter
+  test "should show survey" do
+    get survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@not_owner)}
+    assert_response :success
+
+    get survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}
+    assert_response :success
+  end
+
+  # nur owner
   test "only owner should update survey" do
     patch survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@not_owner)}, params: { survey: { name: @survey.name, user_id: @survey.user_id } }
     assert_response 403
@@ -15,48 +42,14 @@ class SurveysControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # löschen mit Token, aber nicht owner => X
-  # löschen mit Token und owner => success
+  # nur owner
   test "only owner should destroy survey" do
     delete survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@not_owner)}
     assert_response 403
     
-    delete survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}
-    assert_response :success
-  end
-
-### standard tests
-
-  # user darf: survey erstellen, verändern (submitten)
-  # owner darf: lesen, löschen
-
-  test "should get index" do
-    get surveys_url, as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}
-    assert_response :success
-  end
-
-  test "should create survey" do
-    assert_difference('Survey.count') do
-      post surveys_url, params: { survey: { fromDate: @survey.fromDate, name: @survey.name, toDate: @survey.toDate, user_id: @survey.user_id } }, as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}
+    assert_difference('Survey.count', -1) do
+      delete survey_url(@survey), as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@owner)}
     end
-    assert_response 201
+    assert_response :success
   end
-
-  # test "should show survey" do
-  #   get survey_url(@survey), as: :json
-  #   assert_response :success
-  # end
-
-  # test "should update survey" do
-  #   patch survey_url(@survey), params: { survey: { fromDate: @survey.fromDate, name: @survey.name, toDate: @survey.toDate, user_id: @survey.user_id } }, as: :json
-  #   assert_response 200
-  # end
-
-  # test "should destroy survey" do
-  #   assert_difference('Survey.count', -1) do
-  #     delete survey_url(@survey), as: :json
-  #   end
-
-  #   assert_response 204
-  # end
 end

@@ -6,7 +6,6 @@ class ApplicationController < ActionController::API
   def require_requester_to_be(u)
     if u.email != @requester_email then
       render :nothing => true, :status => 403
-      return
     end
   end
 

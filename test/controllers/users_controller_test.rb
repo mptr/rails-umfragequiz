@@ -21,8 +21,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-### standard tests
-
   test "should create user" do
     assert_difference('User.count') do
       post users_url, params: { user: { email: @user.email, username: @user.username } }, as: :json, headers:{"HTTP_AUTHORIZATION" => generate_token_for(@user)}

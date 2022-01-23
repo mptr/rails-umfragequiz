@@ -33,11 +33,11 @@ class SurveysController < ApplicationController
     end
 
     @survey = Survey.new(survey_params)
-    puts "######################################"
-    puts survey_params
-    survey_params[:questions].each_with_index{|val, index|
-      @survey.questions.append(Question.new(val))
-    }
+    # puts "######################################"
+    # puts survey_params
+    # survey_params[:questions].each_with_index{|val, index|
+    #   @survey.questions.append(Question.new(val))
+    # }
     # @survey.questions.append(survey_params[:questions])
     @user.surveys.append(@survey)
 
