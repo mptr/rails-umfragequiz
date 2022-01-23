@@ -15,37 +15,17 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   def create
-    # only survey owner can create a question
-    require_requester_to_be(@question.survey.user)
-
-    @question = Question.new(question_params)
-    @survey.questions.append(@question)
-
-    if @question.save
-      render json: @question, status: :created
-    else
-      render json: @question.errors, status: :unprocessable_entity
-    end
+    render :nothing => true, :status => 405
   end
 
   # PATCH/PUT /questions/1
   def update
-    # only survey owner can update a question
-    require_requester_to_be(@question.survey.user)
-
-    if @question.update(question_params)
-      render json: @question
-    else
-      render json: @question.errors, status: :unprocessable_entity
-    end
+    render :nothing => true, :status => 405
   end
 
   # DELETE /questions/1
   def destroy
-    # only survey owner can destroy a question
-    require_requester_to_be(@question.survey.user)
-    
-    @question.destroy
+    render :nothing => true, :status => 405
   end
 
   private
@@ -56,21 +36,5 @@ class QuestionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_question
       @question = @survey.questions.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def question_params
-      permits = [:optional, :description, :survey_id, :type] # general question params
-      case params[:type]
-        when 'SingleChoiceQuestion'
-          permits.append(:answer_options, :random_order)
-        when 'MultipleChoiceQuestion'
-          permits.append(:up_to, :answer_options, :random_order)
-        when "LikertQuestion"
-          permits.append(:questions, :answer_options, :random_order)
-        when "SliderQuestion", "NumberQuestion"
-          permits.append(:from, :to, :step)
-      end
-      params.require(:question).permit(permits)
     end
 end

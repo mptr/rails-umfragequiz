@@ -38,6 +38,7 @@ NpsQuestion1:
 SingleChoiceQuestion1:
   type: SingleChoiceQuestion
   optional: true
+  random_order: true
   description: "What is the operating system of your mobile phone?"
   answer_options: "[\"Android\",\"iOS\",\"Windows Phone\",\"other\"]"
   survey: one
@@ -45,6 +46,7 @@ SingleChoiceQuestion1:
 MultipleChoiceQuestion1:
   type: MultipleChoiceQuestion
   optional: false
+  random_order: false
   description: "Which pets do you have?"
   answer_options: "[\"cat\",\"dog\",\"bird\",\"fish\",\"other\"]"
   survey: one
@@ -52,6 +54,7 @@ MultipleChoiceQuestion1:
 PrioQuestion1:
   type: PrioQuestion
   optional: true
+  random_order: false
   description: "Order these primes ascending:"
   answer_options: "[29,13,37,2,17,5]"
   survey: one
@@ -59,6 +62,7 @@ PrioQuestion1:
 LikertQuestion1:
   type: LikertQuestion
   optional: false
+  random_order: true
   description: "How much do you like these foods?"
   answer_options: "[\"very much\",\"quite a bit\",\"not much\",\"not at all\"]"
   questions: '["Broccoli", "Bananas", "Chocolate", "Burger", "Salad", "Pizza"]'
@@ -103,6 +107,7 @@ NpsQuestion2:
 SingleChoiceQuestion2:
   type: SingleChoiceQuestion
   optional: false
+  random_order: false
   description: "What is your favourite programming language?"
   answer_options: "[\"Java\",\"C++\",\"Python\",\"Ruby\",\"JavaScript\",\"PHP\",\"C#\",\"Go\",\"other\"]"
   survey: two
@@ -110,6 +115,7 @@ SingleChoiceQuestion2:
 MultipleChoiceQuestion2:
   type: MultipleChoiceQuestion
   optional: true
+  random_order: false
   description: "Select up to three of your favourite vacation destinations:"
   answer_options: "[\"Hills\",\"Beach\",\"Home\",\"Woods\",\"Urban\",\"Island\",\"other\"]"
   survey: two
@@ -117,6 +123,7 @@ MultipleChoiceQuestion2:
 PrioQuestion2:
   type: PrioQuestion
   optional: false
+  random_order: true
   description: "Order these historical events from oldest to latest:"
   answer_options: "[\"iPhone\", \"steam engine\", \"dinosaurs\", \"you filling this survey\", \"big bang\"]"
   survey: two
@@ -124,6 +131,7 @@ PrioQuestion2:
 LikertQuestion2:
   type: LikertQuestion
   optional: true
+  random_order: true
   description: "How much do you like these Computer Games?"
   answer_options: "[\"very much\",\"quite a bit\",\"not much\",\"not at all\",\"don't know\"]"
   questions: "[\"PacMan\",\"Snake\",\"Tetris\",\"Minecraft\",\"Counter Strike\",\"Doom\",\"Chrome Offline-Game (dino)\"]"

@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2022_01_12_171442) do
     t.decimal "step"
     t.integer "up_to"
     t.string "answer_options"
+    t.boolean "random_order"
     t.string "questions"
     t.boolean "optional", null: false
     t.string "description", null: false

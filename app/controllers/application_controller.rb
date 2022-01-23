@@ -6,7 +6,6 @@ class ApplicationController < ActionController::API
   def require_requester_to_be(u)
     if u.email != @requester_email then
       render :nothing => true, :status => 403
-      return
     end
   end
 
@@ -23,12 +22,12 @@ class ApplicationController < ActionController::API
 
     # fake token if in dev or test environment
     if Rails.env == "development" || Rails.env == "test" then
-      if token.second == "magically-generated" then
+      if token&.second == "magically-generated" then
         @requester_username = token.third
         @requester_email = token.fourth
         return
       end
-    end  
+    end
 
     token = token&.second
 
@@ -41,7 +40,7 @@ class ApplicationController < ActionController::API
     validator = GoogleIDToken::Validator.new
     begin
       payload = validator.check(token, "709962217448-ecjl8ic8hafu4sbu14l11tefrg927jmi.apps.googleusercontent.com")
-      puts payload
+      # puts payload
       @requester_email = payload['email']
       @requester_username = payload['name']
     rescue GoogleIDToken::ValidationError => e

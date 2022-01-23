@@ -27,13 +27,25 @@ class SurveysController < ApplicationController
 
   # POST /surveys
   def create
-    @survey = Survey.new(survey_params)
-    @user.survey.append(@survey)
-
-    if @survey.save
-      render json: @survey, status: :created, location: @survey
-    else
-      render json: @survey.errors, status: :unprocessable_entity
+    if @user == nil
+      return render :nothing => true, :status => 400
+    end
+    ActiveRecord::Base.transaction do
+      @survey = Survey.new(survey_params)
+      @survey.user = @user
+      if @survey.save
+      else
+        return render json: @survey.errors, status: :unprocessable_entity
+      end
+      question_params[:questions].each_with_index{|val, index|
+        q = Question.new(val)
+        q.survey = @survey
+        if q.save
+        else
+          return render json: @survey.errors, status: :unprocessable_entity
+        end
+      }
+      render json: @survey, status: 200
     end
   end
 
@@ -77,8 +89,16 @@ class SurveysController < ApplicationController
       end
     end
 
-    # Only allow a list of trusted parameters through.
     def survey_params
-      params.require(:survey).permit(:name, :from_date, :to_date, :user_id)
+        params.require(:survey).permit(
+          :name, :from_date, :to_date, :user_id
+        )
+    end
+    def question_params
+      params.permit(
+        questions: [
+          :optional, :description, :position, :survey_id, :type, :random_order, :up_to, :from, :to, :step, answer_options: [], questions: []
+        ]
+      )
     end
 end
