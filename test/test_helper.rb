@@ -45,10 +45,10 @@ module RearrangeableQuestionTests
 		             @q.answer_options,
 		             'Failed to keep order of answer_options'
 		@q.answer_options.sort
-		@q.save
-		q_restore = PrioQuestion.last
+		assert @q.save, 'Failed to save with two reordered answer_options'
+		q_restore = RearrangeableQuestion.last
 		assert_equal %w[a b],
-		             q_restore.answer_options,
+					  q_restore.answer_options,
 		             'Failed to keep order of answer_options after reorder'
 	end
 end
