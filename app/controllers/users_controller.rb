@@ -22,7 +22,6 @@ class UsersController < ApplicationController
 
 	# POST /users
 	def create
-		puts "SIGNUP: #{@requester_username}  #{@requester_email}"
 		@user = User.new(username: @requester_username, email: @requester_email)
 
 		if @user.save

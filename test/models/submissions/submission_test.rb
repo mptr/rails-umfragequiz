@@ -8,5 +8,4 @@ class SubmissionTest < ActiveSupport::TestCase
 				question: Question.first
 			)
 	end
-	include AbstractClassTest
 end

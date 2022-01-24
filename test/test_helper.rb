@@ -37,7 +37,7 @@ end
 # requires @q to be defined as the question to be tested
 module AbstractClassTest
 	def test_should_be_abstract_class
-		assert_not @q.save, 'Saved instance of abstract class'
+		assert_not @q.save, "Saved instance of abstract class #{@q.type}"
 	end
 end
 
@@ -110,20 +110,22 @@ module NumberRangeQuestionTests
 	end
 
 	def test_should_not_save_without_from_and_to
-		@q.from = nil
-		@q.to = nil
-		assert_not @q.save, 'Saved without from&to'
+		if(@q.type != "NpsQuestion") # NpsQuestion has default for this
+			@q.from = nil
+			@q.to = nil
+			assert_not @q.save, 'Saved without from&to'
 
-		@q.from = 1
-		@q.to = nil
-		assert_not @q.save, 'Saved without to'
+			@q.from = 1
+			@q.to = nil
+			assert_not @q.save, 'Saved without to'
 
-		@q.to = 10
-		@q.from = nil
-		assert_not @q.save, 'Saved without from'
+			@q.to = 10
+			@q.from = nil
+			assert_not @q.save, 'Saved without from'
 
-		@q.to = 10
-		@q.from = 1
-		assert @q.save, 'Failed to save with valid from&to'
+			@q.to = 10
+			@q.from = 1
+			assert @q.save, 'Failed to save with valid from&to'
+		end
 	end
 end

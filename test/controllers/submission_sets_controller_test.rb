@@ -34,36 +34,22 @@ class SubmissionSetsControllerTest < ActionDispatch::IntegrationTest
 	end
 
 	test 'should create submission_set' do
+		s = Survey.new(from_date: DateTime.now, to_date: DateTime.tomorrow, name: "Test Survey928364")
+		s.user = User.first
+		q = Question.new(type: "TextQuestion", description: "Test Question01", optional: false)
+		s.save
 		post submission_sets_url(@survey),
 		     params: {
 				submission_set: {
-					survey_id: @submission_set.survey_id,
+					survey_id: s.id,
 					user_id: @other_user.id,
 				},
-				submissions: 
-					@survey.submission_sets.sample.submissions
 		     },
 		     as: :json,
 		     headers: {
 				'HTTP_AUTHORIZATION' => generate_token_for(@survey_owner)
 		     }
-		assert_response 422 # unprocessable entity (validation error)
-
-		post submission_sets_url(@survey),
-		     params: {
-				submission_set: {
-					survey_id: @submission_set.survey_id,
-					user_id: @submission_set.user_id,
-					
-				},
-				submissions: 
-						@survey.submission_sets.sample.submissions
-		     },
-		     as: :json,
-		     headers: {
-				'HTTP_AUTHORIZATION' => generate_token_for(@other_user)
-		     }
-		assert_response 422 # unprocessable entity (validation error)
+		assert_response 400 # (because submissions not match)
 	end
 
 	# owner und submitter
