@@ -10,6 +10,10 @@ class UsersController < ApplicationController
 
 	# GET /users/1
 	def show
+		if @user.nil?
+			render :nothing => true, status: if params[:id] == 'self' then 204 else 403 end
+			return
+		end
 		# user can only show self
 		require_requester_to_be(@user) and return
 
@@ -18,6 +22,7 @@ class UsersController < ApplicationController
 
 	# POST /users
 	def create
+		puts "SIGNUP: #{@requester_username}  #{@requester_email}"
 		@user = User.new(username: @requester_username, email: @requester_email)
 
 		if @user.save
