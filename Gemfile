@@ -44,3 +44,4 @@ gem 'acts_as_list'
 
 gem 'jwt'
 gem "http"
+gem "faker"
