@@ -116,6 +116,7 @@ MultipleChoiceQuestion2:
     type: MultipleChoiceQuestion
     optional: true
     random_order: false
+    up_to: 3
     description: "Select up to three of your favourite vacation destinations:"
     answer_options: '["Hills","Beach","Home","Woods","Urban","Island","other"]'
     survey: two
