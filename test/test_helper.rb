@@ -62,7 +62,7 @@ module RearrangeableQuestionTests
 		assert_equal %w[b a],
 		             @q.answer_options,
 		             'Failed to keep order of answer_options'
-		@q.answer_options.sort
+		@q.answer_options = @q.answer_options.sort # sort does not override
 		assert @q.save, 'Failed to save with two reordered answer_options'
 		q_restore = RearrangeableQuestion.last
 		assert_equal %w[a b],
